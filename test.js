@@ -30,10 +30,11 @@ logger.log('-------')
 logger.setBgColor('red')
 logger.setFontColor('black');
 logger.log('Red font in black background.')
+logger.reset();
 logger.log('-------')
 logger.setBgColor('yellow')
 logger.setFontColor('blue');
 logger.log('Yellow font in blue background.')
-logger.log('-------')
 logger.reset();
+logger.log('-------')
 logger.log('should be reset')
