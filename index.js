@@ -54,22 +54,19 @@ class Logger {
         }
     }
 
-    setFontColor(ticket) {
-        if (ticket in CONFIG.FONT) {
-            console.log(CONFIG.FONT[ticket]);
-            console.log(CONFIG.SYSTEM.backToUpLine);
+    setColor(ticketObj, text) {
+        let colorSetting = '';
+        if (ticketObj.font in CONFIG.FONT) {
+            colorSetting += CONFIG.FONT[ticketObj.font];
         } else {
             this.warn("Font color not found! Use the default.")
         }
-    }
-
-    setBgColor(ticket) {
-        if (ticket in CONFIG.BACKGROUND) {
-            console.log(CONFIG.BACKGROUND[ticket]);
-            console.log(CONFIG.SYSTEM.backToUpLine);
+        if (ticketObj.bg in CONFIG.BACKGROUND) {
+            colorSetting += CONFIG.BACKGROUND[ticketObj.bg]
         } else {
-            this.warn("Background color not found! Setting not change!")
+            this.warn("Background color not found! Use the default.")
         }
+        console.log(`${colorSetting}%s${CONFIG.SYSTEM.reset}`, text);
     }
 
     log(text) {
@@ -77,24 +74,23 @@ class Logger {
     }
 
     reset() {
-        console.log(CONFIG.SYSTEM.reset);
-        console.log(CONFIG.SYSTEM.backToUpLine);
+        console.log(CONFIG.SYSTEM.reset + CONFIG.SYSTEM.backToUpLine);
     }
 
     error(text) {
-        this.fontColor('red', `Error: ${text}`);
+        this.fontColor('red', `ERROR: ${text}`);
     }
 
     warn(text) {
-        this.fontColor('yellow', `Warning: ${text}`);
+        this.fontColor('yellow', `WARN: ${text}`);
     }
 
     info(text) {
-        this.fontColor('green', `Info: ${text}`);
+        this.fontColor('green', `INFO: ${text}`);
     }
 
     degug(text) {
-        this.fontColor('cyan', `Debug: ${text}`);
+        this.fontColor('cyan', `DEBUG: ${text}`);
     }
 }
 

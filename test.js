@@ -19,22 +19,37 @@ logger.bgColor('magenta', 'Background in magenta.');
 logger.bgColor('cyan', 'Background in cyan.');
 logger.bgColor('white', 'Background in white.');
 logger.log('-------')
+logger.degug('This is debug mode');
+logger.error('This is error mode');
+logger.info('This is info mode');
+logger.warn('This is warn mode');
+logger.log('-------')
 logger.fontColor('test', 'Wrong font color test.');
 logger.bgColor('test', 'Wrong background color test.');
 logger.log('-------')
-logger.degug('Debug mode');
-logger.error('Error mode');
-logger.info('Info mode');
-logger.warn('Warn mode');
+logger.setColor({
+    font: 'red',
+    bg: 'black'
+}, 'Red font in black background.');
 logger.log('-------')
-logger.setBgColor('red')
-logger.setFontColor('black');
-logger.log('Red font in black background.')
-logger.reset();
+logger.setColor({
+    font: 'blue',
+    bg: 'yellow'
+}, 'blue font in yellow background.');
 logger.log('-------')
-logger.setBgColor('yellow')
-logger.setFontColor('blue');
-logger.log('Yellow font in blue background.')
-logger.reset();
+logger.setColor({
+    font: 'test',
+    bg: 'blue'
+}, 'Wrong font color in blue background.');
+logger.log('-------')
+logger.setColor({
+    font: 'red',
+    bg: 'test'
+}, 'Red font color in wrong background color.');
+logger.log('-------')
+logger.setColor({
+    font: 'test',
+    bg: 'test'
+}, 'Wrong font color in wrong background color.');
 logger.log('-------')
 logger.log('should be reset')
