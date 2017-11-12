@@ -1,5 +1,6 @@
 ![Banner](https://raw.githubusercontent.com/tigercosmos/node-color-log/master/assets/banner.png)
 [![Build Status](https://travis-ci.org/tigercosmos/node-color-log.svg?branch=master)](https://travis-ci.org/tigercosmos/node-color-log)
+[![npm version](https://badge.fury.io/js/node-color-log.svg)](https://badge.fury.io/js/node-color-log)
 # Node Color Log
 The more powerful logger for NodeJS.
 
