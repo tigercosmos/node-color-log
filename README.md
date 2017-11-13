@@ -12,6 +12,12 @@ The more powerful logger for NodeJS.
 <img alt="Demo" src="https://raw.githubusercontent.com/tigercosmos/node-color-log/master/assets/demo.JPG" width="500">
 
 ## Usage
+Install package in your project:
+```
+npm install node-color-log --save
+```
+
+Put the following code in your `js` in which you want to log.
 ```javascript
 const Logger = require('node-color-log');
 const logger = new Logger();
@@ -31,6 +37,7 @@ let message = 'anything you will put into console.log';
 
 // normal
 logger.log(message)
+
 // set font color
 logger.fontColor('red', message, setting);
 // set background color
@@ -41,8 +48,8 @@ logger.setColor({
     bg: 'yellow'
 }, message, setting);
 
-// Degug level, with prefix "DEBUG: "
-logger.degug(message);
+// debug level, with prefix "DEBUG: "
+logger.debug(message);
 // Error level, with prefix "ERROR: "
 logger.error(message);
 // Info level, with prefix "INFO: "

@@ -95,7 +95,7 @@ logger.log('\n');
 logger.log('**********************');
 logger.log('*** Test Level Log ***');
 logger.log('**********************');
-logger.degug('This is debug mode');
+logger.debug('This is debug mode');
 logger.error('This is error mode');
 logger.info('This is info mode');
 logger.warn('This is warn mode');
