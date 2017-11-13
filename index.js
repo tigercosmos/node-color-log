@@ -89,7 +89,7 @@ class Logger {
         this.fontColor('green', `INFO: ${text}`);
     }
 
-    degug(text) {
+    debug(text) {
         this.fontColor('cyan', `DEBUG: ${text}`);
     }
 }

@@ -19,7 +19,7 @@ logger.bgColor('magenta', 'Background in magenta.');
 logger.bgColor('cyan', 'Background in cyan.');
 logger.bgColor('white', 'Background in white.');
 logger.log('-------');
-logger.degug('This is debug mode');
+logger.debug('This is debug mode');
 logger.error('This is error mode');
 logger.info('This is info mode');
 logger.warn('This is warn mode');
