@@ -1,7 +1,7 @@
 const CONFIG = {
     SYSTEM: {
         reset: "\x1b[0m",
-        bright: "\x1b[1m",
+        bold: "\x1b[1m",
         dim: "\x1b[2m",
         underscore: "\x1b[4m",
         blink: "\x1b[5m",
@@ -36,37 +36,54 @@ class Logger {
 
     }
 
-    fontColor(ticket, text) {
+    fontColor(ticket, text, setting) {
+        let command = '';
+        if (setting) {
+            command += this.checkSetting(setting);
+        }
         if (ticket in CONFIG.FONT) {
-            console.log(`${CONFIG.FONT[ticket]}%s${CONFIG.SYSTEM.reset}`, text);
+            command += CONFIG.FONT[ticket];
         } else {
-            console.log(text);
             this.warn("Font color not found! Use the default.")
         }
+        command += '%s';
+        command += CONFIG.SYSTEM.reset;
+        console.log(command, text);
     }
 
-    bgColor(ticket, text) {
+    bgColor(ticket, text, setting) {
+        let command = '';
+        if (setting) {
+            command += this.checkSetting(setting);
+        }
         if (ticket in CONFIG.BACKGROUND) {
-            console.log(`${CONFIG.BACKGROUND[ticket]}%s${CONFIG.SYSTEM.reset}`, text);
+            command += CONFIG.BACKGROUND[ticket];
         } else {
-            console.log(text);
             this.warn("Background color not found! Use the default.")
         }
+        command += '%s';
+        command += CONFIG.SYSTEM.reset;
+        console.log(command, text);
     }
 
-    setColor(ticketObj, text) {
-        let colorSetting = '';
+    setColor(ticketObj, text, setting) {
+        let command = '';
+        if (setting) {
+            command += this.checkSetting(setting);
+        }
         if (ticketObj.font in CONFIG.FONT) {
-            colorSetting += CONFIG.FONT[ticketObj.font];
+            command += CONFIG.FONT[ticketObj.font];
         } else {
             this.warn("Font color not found! Use the default.")
         }
         if (ticketObj.bg in CONFIG.BACKGROUND) {
-            colorSetting += CONFIG.BACKGROUND[ticketObj.bg]
+            command += CONFIG.BACKGROUND[ticketObj.bg]
         } else {
             this.warn("Background color not found! Use the default.")
         }
-        console.log(`${colorSetting}%s${CONFIG.SYSTEM.reset}`, text);
+        command += '%s';
+        command += CONFIG.SYSTEM.reset;
+        console.log(command, text);
     }
 
     log(text) {
@@ -91,6 +108,23 @@ class Logger {
 
     degug(text) {
         this.fontColor('cyan', `DEBUG: ${text}`);
+    }
+
+    checkSetting(setting) {
+        const validSetting = ['bold', 'dim', 'underscore', 'reverse'];
+        let command = '';
+        for (const item in setting) {
+            if (validSetting.indexOf(item) !== -1) {
+                if (setting[item] === true) {
+                    command += CONFIG.SYSTEM[item];
+                } else if (setting[item] !== false) {
+                    this.warn(`The value ${item} should be boolean.`)
+                }
+            } else {
+                this.warn(`${item} is not valid in setting.`)
+            }
+        }
+        return command;
     }
 }
 

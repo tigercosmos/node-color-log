@@ -19,17 +19,27 @@ const logger = new Logger();
 // Both font and background color including:
 // 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'
 
+// Optional parameter
+const setting = {
+    bold: true,
+    dim: false,
+    underscore: true,
+    reverse: true,
+}
+
+let message = 'anything you will put into console.log';
+
 // normal
 logger.log(message)
 // set font color
-logger.fontColor('red', message);
+logger.fontColor('red', message, setting);
 // set background color
-logger.bgColor('yellow', message);
+logger.bgColor('yellow', message, setting);
 // set font and background color
 logger.setColor({
     font: 'black',
     bg: 'yellow'
-}, message);
+}, message, setting);
 
 // Degug level, with prefix "DEBUG: "
 logger.degug(message);
