@@ -1,95 +1,113 @@
 const Logger = require('./index');
 const logger = new Logger();
 
-logger.log('************************');
-logger.log('*** Test Font Color ****');
-logger.log('************************');
-logger.fontColor('red', 'Font in red.');
-logger.fontColor('black', 'Font in black.');
-logger.fontColor('green', 'Font in green.');
-logger.fontColor('yellow', 'Font in yellow.');
-logger.fontColor('blue', 'Font in blue.');
-logger.fontColor('magenta', 'Font in magenta.');
-logger.fontColor('cyan', 'Font in cyan.');
-logger.fontColor('white', 'Font in white.');
-logger.fontColor('blue', 'Bold, blue', {
+
+logger.log('****************');
+logger.log('*** Test log ***');
+logger.log('****************');
+logger.color('blue').underscore().log('blue and underscore.');
+logger.color('blue').reverse().log('blue and reverse.');
+logger.color('blue').dim().log('blue and dim.');
+logger.color('blue').italic().log('blue and italic.');
+logger.color('blue').strikethrough().log('blue and strikethrough.');
+logger.color('red').bold().log('Red and Bold.');
+logger.color('blue').bgColor('yellow').bold().italic().log('blue, yellow, bold, italic, ');
+logger.log('this should be normal.')
+logger.bold().italic().color('blue').bgColor('yellow').log('bold, italic, blue, yellow.');
+logger.log('\n');
+
+logger.log('**************************');
+logger.log('*** Test fontColorLog ****');
+logger.log('**************************');
+logger.fontColorLog('red', 'Font in red.');
+logger.fontColorLog('black', 'Font in black.');
+logger.fontColorLog('green', 'Font in green.');
+logger.fontColorLog('yellow', 'Font in yellow.');
+logger.fontColorLog('blue', 'Font in blue.');
+logger.fontColorLog('magenta', 'Font in magenta.');
+logger.fontColorLog('cyan', 'Font in cyan.');
+logger.fontColorLog('white', 'Font in white.');
+logger.fontColorLog('blue', 'Bold, blue, italic', {
     bold: true,
     underscore: false,
- });
-logger.fontColor('blue', 'Bold, dim, underscore, reverse', {
+    italic: true
+});
+logger.fontColorLog('blue', 'Bold, dim, underscore, reverse', {
     bold: true,
     dim: true,
     underscore: true,
     reverse: true,
- });
- logger.fontColor('blue', 'Bold, underscore, blue.', {
+});
+logger.fontColorLog('blue', 'Bold, underscore, blue.', {
     bold: true,
     dim: false,
     underscore: true,
     reverse: false,
- });
+});
 logger.log('\n');
 
-logger.log('******************************');
-logger.log('*** Test Background Color ****');
-logger.log('******************************');
-logger.bgColor('red', 'Background in red.');
-logger.bgColor('black', 'Background in black.');
-logger.bgColor('green', 'Background in green.');
-logger.bgColor('yellow', 'Background in yellow.');
-logger.bgColor('blue', 'Background in blue.');
-logger.bgColor('magenta', 'Background in magenta.');
-logger.bgColor('cyan', 'Background in cyan.');
-logger.bgColor('white', 'Background in white.');
-logger.bgColor('blue', 'Bold, blue', {
+logger.log('************************');
+logger.log('*** Test bgColorLog ****');
+logger.log('************************');
+logger.bgColorLog('red', 'Background in red.');
+logger.bgColorLog('black', 'Background in black.');
+logger.bgColorLog('green', 'Background in green.');
+logger.bgColorLog('yellow', 'Background in yellow.');
+logger.bgColorLog('blue', 'Background in blue.');
+logger.bgColorLog('magenta', 'Background in magenta.');
+logger.bgColorLog('cyan', 'Background in cyan.');
+logger.bgColorLog('white', 'Background in white.');
+logger.bgColorLog('blue', 'Bold, blue', {
     bold: true,
     underscore: false,
- });
-logger.bgColor('blue', 'Bold, dim, underscore, reverse', {
+});
+logger.bgColorLog('blue', 'Bold, dim, underscore, reverse', {
     bold: true,
     dim: true,
     underscore: true,
     reverse: true,
- });
- logger.bgColor('blue', 'Bold, underscore, blue.', {
+});
+logger.bgColorLog('blue', 'Bold, underscore, blue.', {
     bold: true,
     dim: false,
     underscore: true,
     reverse: false,
- });
+});
 logger.log('\n');
 
-logger.log('***********************');
-logger.log('*** Test Set Color ****');
-logger.log('***********************');
-logger.setColor({
+logger.log('*************************');
+logger.log('*** Test colorLog ****');
+logger.log('*************************');
+logger.colorLog({
     font: 'red',
     bg: 'black'
 }, 'Red font in black background.');
-logger.setColor({
+logger.colorLog({
     font: 'blue',
     bg: 'yellow'
 }, 'blue font in yellow background.');
-logger.setColor({
+logger.colorLog({
     font: 'red',
     bg: 'green'
 }, 'Red font in green background.');
-logger.setColor({
+logger.colorLog({
     font: 'red',
     bg: 'green'
-}, 'Red font in green background, underscore.',{
+}, 'Red font in green background, underscore, strikethrough.', {
     underscore: true,
     reverse: false,
- });
-logger.setColor({
+    strikethrough: true
+});
+logger.colorLog({
     font: 'red',
     bg: 'green'
-}, 'Red font in green background, bold, underscore, reverse.',{
+}, 'Red font in green background, bold, underscore, reverse, strikethrough.', {
     bold: true,
     dim: false,
     underscore: true,
     reverse: true,
- });
+    strikethrough: true
+});
 logger.log('\n');
 
 logger.log('**********************');
@@ -104,26 +122,26 @@ logger.log('\n');
 logger.log('*************************');
 logger.log('*** Test Wrong Usage ****');
 logger.log('*************************');
-logger.fontColor('test', 'Should be no color.');
-logger.bgColor('test', 'Should be no color.');
-logger.setColor({
+logger.fontColorLog('test', 'Should be no color.');
+logger.bgColorLog('test', 'Should be no color.');
+logger.colorLog({
     font: 'test',
     bg: 'blue'
 }, 'Font color warning.');
-logger.setColor({
+logger.colorLog({
     font: 'red',
     bg: 'test'
 }, 'Background color warning.');
-logger.setColor({
+logger.colorLog({
     font: 'test',
     bg: 'test'
 }, 'Font and background color warning.');
-logger.fontColor('red', 'Wrong setting.', {
+logger.fontColorLog('red', 'Wrong setting.', {
     width: true,
 });
-logger.bgColor('red', 'Wrong setting.', {
+logger.bgColorLog('red', 'Wrong setting.', {
     dim: 'true',
 });
-logger.bgColor('red', 'Wrong setting.', {
+logger.bgColorLog('red', 'Wrong setting.', {
     bold: 4
 });

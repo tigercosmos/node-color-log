@@ -19,34 +19,42 @@ npm install node-color-log --save
 
 Put the following code in your `js` in which you want to log.
 ```javascript
+
 const Logger = require('node-color-log');
 const logger = new Logger();
 
-// Both font and background color including:
-// 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'
-
-// Optional parameter
+// color can be used in anywhere need to fill color name.
+// including: 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'
+let color = '';
+let message = 'anything you will put into console.log';
+// optional parameter, need to be boolean. false by defualt.
 const setting = {
     bold: true,
-    dim: false,
+    dim: true,
     underscore: true,
     reverse: true,
+    italic: true,
+    strikethrough: true
 }
 
-let message = 'anything you will put into console.log';
-
-// normal
+// normal log
 logger.log(message)
+// log with attributes, the order of setters can change.
+// NOTE: log() need tot put at the last.
+logger.color('red').bgColor('blue')
+      .bold().italic().dim().reverse().underscore()
+      .log(message);
 
-// set font color
-logger.fontColor('red', message, setting);
-// set background color
-logger.bgColor('yellow', message, setting);
+// only set font color
+logger.fontColorLog('red', message, setting);
+// only set background color
+logger.bgColorLog('yellow', message, setting);
 // set font and background color
-logger.setColor({
+logger.colorLog({
     font: 'black',
     bg: 'yellow'
 }, message, setting);
+
 
 // debug level, with prefix "DEBUG: "
 logger.debug(message);
@@ -57,6 +65,11 @@ logger.info(message);
 // Warn level, with prefix "WARN: "
 logger.warn(message);
 ```
+
+To see more example, you can check `./test.js`.
+
+### Contribute
+Any issues and PRs are very welcome!
 
 ### Lisense
 MIT

@@ -3,11 +3,10 @@ const CONFIG = {
         reset: "\x1b[0m",
         bold: "\x1b[1m",
         dim: "\x1b[2m",
+        italic: "\x1b[3m",
         underscore: "\x1b[4m",
-        blink: "\x1b[5m",
         reverse: "\x1b[7m",
-        hidden: "\x1b[8m",
-        backToUpLine: "\x1b[2A"
+        strikethrough: "\x1b[9m",
     },
     FONT: {
         black: "\x1b[30m",
@@ -33,10 +32,70 @@ const CONFIG = {
 
 class Logger {
     constructor() {
-
+        this.initSetting();
     }
 
-    fontColor(ticket, text, setting) {
+    initSetting() {
+        this.command = '';
+    }
+
+    log(text) {
+        let command = this.command;
+        command += "%s";
+        command += CONFIG.SYSTEM.reset;
+        console.log(command, text);
+        this.command = '';
+    }
+
+    color(ticket) {
+        if (ticket in CONFIG.FONT) {
+            this.command += CONFIG.FONT[ticket];
+        } else {
+            this.warn("Font color not found! Use the default.")
+        }
+        return this;
+    }
+
+    bgColor(ticket) {
+        if (ticket in CONFIG.BACKGROUND) {
+            this.command += CONFIG.BACKGROUND[ticket];
+        } else {
+            this.warn("Background color not found! Use the default.")
+        }
+        return this;
+    }
+
+    bold() {
+        this.command += CONFIG.SYSTEM.bold;
+        return this;
+    }
+
+    dim() {
+        this.command += CONFIG.SYSTEM.dim;
+        return this;
+    }
+
+    underscore() {
+        this.command += CONFIG.SYSTEM.underscore;
+        return this;
+    }
+
+    strikethrough() {
+        this.command += CONFIG.SYSTEM.strikethrough;
+        return this;
+    }
+
+    reverse() {
+        this.command += CONFIG.SYSTEM.reverse;
+        return this;
+    }
+
+    italic() {
+        this.command += CONFIG.SYSTEM.italic;
+        return this;
+    }
+
+    fontColorLog(ticket, text, setting) {
         let command = '';
         if (setting) {
             command += this.checkSetting(setting);
@@ -51,7 +110,7 @@ class Logger {
         console.log(command, text);
     }
 
-    bgColor(ticket, text, setting) {
+    bgColorLog(ticket, text, setting) {
         let command = '';
         if (setting) {
             command += this.checkSetting(setting);
@@ -66,7 +125,7 @@ class Logger {
         console.log(command, text);
     }
 
-    setColor(ticketObj, text, setting) {
+    colorLog(ticketObj, text, setting) {
         let command = '';
         if (setting) {
             command += this.checkSetting(setting);
@@ -86,32 +145,24 @@ class Logger {
         console.log(command, text);
     }
 
-    log(text) {
-        console.log(text);
-    }
-
-    reset() {
-        console.log(CONFIG.SYSTEM.reset + CONFIG.SYSTEM.backToUpLine);
-    }
-
     error(text) {
-        this.fontColor('red', `ERROR: ${text}`);
+        this.fontColorLog('red', `ERROR: ${text}`);
     }
 
     warn(text) {
-        this.fontColor('yellow', `WARN: ${text}`);
+        this.fontColorLog('yellow', `WARN: ${text}`);
     }
 
     info(text) {
-        this.fontColor('green', `INFO: ${text}`);
+        this.fontColorLog('green', `INFO: ${text}`);
     }
 
     debug(text) {
-        this.fontColor('cyan', `DEBUG: ${text}`);
+        this.fontColorLog('cyan', `DEBUG: ${text}`);
     }
 
     checkSetting(setting) {
-        const validSetting = ['bold', 'dim', 'underscore', 'reverse'];
+        const validSetting = ['bold', 'italic', 'dim', 'underscore', 'reverse', 'strikethrough'];
         let command = '';
         for (const item in setting) {
             if (validSetting.indexOf(item) !== -1) {
