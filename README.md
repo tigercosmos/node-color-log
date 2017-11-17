@@ -42,7 +42,7 @@ logger.log(message)
 // log with attributes, the order of setters can change.
 // NOTE: log() need tot put at the last.
 logger.color('red').bgColor('blue')
-      .bold().italic().dim().reverse().underscore()
+      .bold().italic().dim().reverse().underscore().strikethrough()
       .log(message);
 
 // only set font color
