@@ -9,6 +9,8 @@ The more powerful logger for NodeJS.
 
 ## Demo
 
+<img alt="Demo" src="https://raw.githubusercontent.com/tigercosmos/node-color-log/master/assets/demo-log.png" width="500">
+
 <img alt="Demo" src="https://raw.githubusercontent.com/tigercosmos/node-color-log/master/assets/demo.JPG" width="500">
 
 ## Usage
