@@ -1,3 +1,7 @@
+1.0.1
+- update demo image
+- update readme
+
 1.0.0
 - `log` add attribute setter `color`, `bgColor`, `bold`, `italic`, `dim`, `reverse`, `undserscore`, `strikethrough`
 - `fontColor` rename `fontColorLog`
