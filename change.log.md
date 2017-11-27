@@ -1,3 +1,6 @@
+1.0.2
+- update demo image
+
 1.0.1
 - update demo image
 - update readme
