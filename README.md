@@ -14,22 +14,33 @@ The more powerful logger for NodeJS.
 <img alt="Demo" src="https://raw.githubusercontent.com/tigercosmos/node-color-log/master/assets/demo-color.png" width="800">
 
 ## Usage
+
+### Install
+
 Install package in your project:
+
+```bash
+npm install node-color-log@latest --save
 ```
-npm install node-color-log --save
-```
+
+### Import
 
 Put the following code in your `js` in which you want to log.
-```javascript
 
+```javascript
 const Logger = require('node-color-log');
 const logger = new Logger();
+```
 
-// color can be used in anywhere need to fill color name.
-// including: 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'
-let color = '';
+### Some parameters:
+
+- `color` includes: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
+
+- `setting` is optional, which is only used in `colorLog`, `fontColorLog` and `bgColorlog`. Keys in `setting` need to be boolean, and false by defualt.
+
+```javascript
+let color = 'red';
 let message = 'anything you will put into console.log';
-// optional parameter, need to be boolean. false by defualt.
 const setting = {
     bold: true,
     dim: true,
@@ -38,15 +49,32 @@ const setting = {
     italic: true,
     strikethrough: true
 }
+```
 
+### `log()`
+
+log with attributes, the order of setters can change.
+
+**NOTE:** `log()` need to put behind of attribute setter(at the end).
+
+`joint()` can connect different style of message in a line.
+
+```javascript
 // normal log
 logger.log(message)
-// log with attributes, the order of setters can change.
-// NOTE: log() need tot put at the last.
+// Attribute log
 logger.color('red').bgColor('blue')
       .bold().italic().dim().reverse().underscore().strikethrough()
       .log(message);
+// Joint log
+logger.color('red').bold().log(message_style_1).joint()
+      .bgColor('white').italic().log(message_style_2).joint()
+      .strikethrough().log(message_style_3);
+```
 
+### `fontColorLog()`, `bgColorLog()`, `colorLog()`
+
+```javascript
 // only set font color
 logger.fontColorLog('red', message, setting);
 // only set background color
@@ -56,8 +84,13 @@ logger.colorLog({
     font: 'black',
     bg: 'yellow'
 }, message, setting);
+```
 
+### `debug()`, `error()`, `info()`, `warn()`
 
+With prefix that has background color
+
+```javascript
 // debug level, with prefix "DEBUG: "
 logger.debug(message);
 // Error level, with prefix "ERROR: "
@@ -71,7 +104,9 @@ logger.warn(message);
 To see more example, you can check `./test.js`.
 
 ### Contribute
+
 Any issues and PRs are very welcome!
 
 ### Lisense
+
 MIT

@@ -7,6 +7,8 @@ const CONFIG = {
         underscore: "\x1b[4m",
         reverse: "\x1b[7m",
         strikethrough: "\x1b[9m",
+        backoneline: "\x1b[1A",
+        cleanthisline: "\x1b[K"
     },
     FONT: {
         black: "\x1b[30m",
@@ -32,19 +34,31 @@ const CONFIG = {
 
 class Logger {
     constructor() {
-        this.initSetting();
-    }
-
-    initSetting() {
+        // Current command
         this.command = '';
+        // Last line
+        this.lastCommand = '';
     }
 
     log(text) {
-        let command = this.command;
-        command += "%s";
-        command += CONFIG.SYSTEM.reset;
-        console.log(command, text);
+        this.command += text;
+        this.command += CONFIG.SYSTEM.reset;
+        console.log(this.command);
+        // Save last command if we need to use for joint
+        this.lastCommand = this.command;
         this.command = '';
+        return this;
+    }
+
+    joint () {
+        // Clear the last line
+        console.log(CONFIG.SYSTEM.backoneline + CONFIG.SYSTEM.cleanthisline);
+        // Reset the command to let it joint the next
+        // And print from the position of last line
+        this.command = '';
+        this.command += CONFIG.SYSTEM.backoneline;
+        this.command += this.lastCommand;
+        return this;
     }
 
     color(ticket) {
@@ -146,19 +160,19 @@ class Logger {
     }
 
     error(text) {
-        this.fontColorLog('red', `ERROR: ${text}`);
+        this.bgColor('red').log('ERROR').joint().color('red').log(" " + text);
     }
 
     warn(text) {
-        this.fontColorLog('yellow', `WARN: ${text}`);
+        this.bgColor('yellow').log('WARN').joint().color('yellow').log(" " + text);
     }
 
     info(text) {
-        this.fontColorLog('green', `INFO: ${text}`);
+        this.bgColor('green').log('INFO').joint().color('green').log(" " + text);        
     }
 
     debug(text) {
-        this.fontColorLog('cyan', `DEBUG: ${text}`);
+        this.bgColor('cyan').log('DEBUG').joint().color('cyan').log(" " + text);        
     }
 
     checkSetting(setting) {
