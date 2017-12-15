@@ -1,3 +1,6 @@
+1.1.1
+- add new demo image
+
 1.1.0
 - add `joint`
 - update `debug()`, `error()`, `info()`, `warn()`
