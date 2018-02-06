@@ -30,8 +30,7 @@ npm install node-color-log@latest --save
 Put the following code in your `js` in which you want to log.
 
 ```javascript
-const Logger = require('node-color-log');
-const logger = new Logger();
+const logger = require('node-color-log');
 ```
 
 ### Some parameters:

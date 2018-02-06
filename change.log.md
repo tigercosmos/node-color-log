@@ -1,3 +1,6 @@
+2.0.0
+- `module.exports` from class type to function.
+
 1.1.1
 - add new demo image
 

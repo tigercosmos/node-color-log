@@ -1,6 +1,4 @@
-const Logger = require('./index');
-const logger = new Logger();
-
+const logger = require('./index');
 
 logger.log('****************');
 logger.log('*** Test log ***');

@@ -193,4 +193,5 @@ class Logger {
     }
 }
 
-module.exports = Logger;
+const logger = new Logger();
+module.exports = logger;
