@@ -1,3 +1,6 @@
+2.0.1
+- banner modified.
+
 2.0.0
 - `module.exports` from class type to function.
 
