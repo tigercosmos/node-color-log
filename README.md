@@ -3,6 +3,8 @@
 [![CircleCI](https://circleci.com/gh/tigercosmos/node-color-log/tree/master.svg?style=shield)](https://circleci.com/gh/tigercosmos/node-color-log/tree/master)
 [![npm version](https://badge.fury.io/js/node-color-log.svg)](https://badge.fury.io/js/node-color-log)
 # Node Color Log
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/tigercosmos/node-color-log.svg)](https://greenkeeper.io/)
 The more powerful logger for NodeJS.
 
 `node-color-log` is a package for NodeJS. It provides more functions than the origin `console.log`. You can log text with colorful font and colorful background. Also, it has four levels log, including `debug`, `info`, `warn`and `error`. Give you much better experience while developing NodeJS projects.
