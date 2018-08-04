@@ -50,13 +50,22 @@ class Logger {
         return this;
     }
 
-    joint () {
+    joint() {
         // Clear the last line
         console.log(CONFIG.SYSTEM.backoneline + CONFIG.SYSTEM.cleanthisline);
+
         // Reset the command to let it joint the next
         // And print from the position of last line
         this.command = '';
+
+        // if joint more than twice, we should clean the previous
+        // backline command, since we shoud only do it for the 
+        // current time.
+        this.lastCommand = this.lastCommand.replace(CONFIG.SYSTEM.backoneline, "");
+
+        // back to the last line
         this.command += CONFIG.SYSTEM.backoneline;
+
         this.command += this.lastCommand;
         return this;
     }
@@ -65,7 +74,7 @@ class Logger {
         if (ticket in CONFIG.FONT) {
             this.command += CONFIG.FONT[ticket];
         } else {
-            this.warn("Font color not found! Use the default.")
+            this.warn("node-color-log: Font color not found! Use the default.")
         }
         return this;
     }
@@ -74,7 +83,7 @@ class Logger {
         if (ticket in CONFIG.BACKGROUND) {
             this.command += CONFIG.BACKGROUND[ticket];
         } else {
-            this.warn("Background color not found! Use the default.")
+            this.warn("node-color-log: Background color not found! Use the default.")
         }
         return this;
     }
@@ -117,7 +126,7 @@ class Logger {
         if (ticket in CONFIG.FONT) {
             command += CONFIG.FONT[ticket];
         } else {
-            this.warn("Font color not found! Use the default.")
+            this.warn("node-color-log: Font color not found! Use the default.")
         }
         command += '%s';
         command += CONFIG.SYSTEM.reset;
@@ -132,7 +141,7 @@ class Logger {
         if (ticket in CONFIG.BACKGROUND) {
             command += CONFIG.BACKGROUND[ticket];
         } else {
-            this.warn("Background color not found! Use the default.")
+            this.warn("node-color-log: Background color not found! Use the default.")
         }
         command += '%s';
         command += CONFIG.SYSTEM.reset;
@@ -147,12 +156,12 @@ class Logger {
         if (ticketObj.font in CONFIG.FONT) {
             command += CONFIG.FONT[ticketObj.font];
         } else {
-            this.warn("Font color not found! Use the default.")
+            this.warn("node-color-log: Font color not found! Use the default.")
         }
         if (ticketObj.bg in CONFIG.BACKGROUND) {
             command += CONFIG.BACKGROUND[ticketObj.bg]
         } else {
-            this.warn("Background color not found! Use the default.")
+            this.warn("node-color-log: Background color not found! Use the default.")
         }
         command += '%s';
         command += CONFIG.SYSTEM.reset;
@@ -160,19 +169,31 @@ class Logger {
     }
 
     error(text) {
-        this.bgColor('red').log('ERROR').joint().color('red').log(" " + text);
+        const d = (new Date()).toISOString();
+        this.log(d + " ").joint()
+            .bgColor('red').log('[ERROR]').joint()
+            .color('red').log(" " + text);
     }
 
     warn(text) {
-        this.bgColor('yellow').log('WARN').joint().color('yellow').log(" " + text);
+        const d = (new Date()).toISOString();
+        this.log(d + " ").joint()
+            .bgColor('yellow').log('[WARN]').joint()
+            .color('yellow').log(" " + text);
     }
 
     info(text) {
-        this.bgColor('green').log('INFO').joint().color('green').log(" " + text);        
+        const d = (new Date()).toISOString();
+        this.log(d + " ").joint()
+            .bgColor('green').log('[INFO]').joint()
+            .color('green').log(" " + text);
     }
 
     debug(text) {
-        this.bgColor('cyan').log('DEBUG').joint().color('cyan').log(" " + text);        
+        const d = (new Date()).toISOString();
+        this.log(d + " ").joint()
+            .bgColor('cyan').log('[DEBUG]').joint()
+            .color('cyan').log(" " + text);
     }
 
     checkSetting(setting) {
@@ -183,10 +204,10 @@ class Logger {
                 if (setting[item] === true) {
                     command += CONFIG.SYSTEM[item];
                 } else if (setting[item] !== false) {
-                    this.warn(`The value ${item} should be boolean.`)
+                    this.warn(`node-color-log: The value ${item} should be boolean.`)
                 }
             } else {
-                this.warn(`${item} is not valid in setting.`)
+                this.warn(`node-color-log: ${item} is not valid in setting.`)
             }
         }
         return command;
