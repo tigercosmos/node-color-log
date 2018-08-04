@@ -78,7 +78,7 @@ logger.bgColorLog('blue', 'Bold, underscore, blue.', {
 logger.log('\n');
 
 logger.log('*************************');
-logger.log('*** Test colorLog ****');
+logger.log('***   Test colorLog  ****');
 logger.log('*************************');
 logger.colorLog({
     font: 'red',
