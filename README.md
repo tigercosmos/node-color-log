@@ -106,7 +106,14 @@ logger.info(message);
 logger.warn(message);
 ```
 
-To see more example, you can check `./test.js`.
+```log
+2018-08-14T18:23:09.837Z [DEBUG] This is debug mode
+2018-08-14T18:23:09.837Z [ERROR] This is error mode
+2018-08-14T18:23:09.838Z [INFO] This is info mode
+2018-08-14T18:23:09.838Z [WARN] This is warn mode
+```
+
+To see more example, you can check `./test.js` or run `npm test` to see the result.
 
 ### Contribute
 

@@ -1,3 +1,6 @@
+2.1.2
+- update README and demo image
+
 2.1.0
 - add time for level log.
   e.g. 2018-08-04T15:58:56.186Z [WARN] XXXXX

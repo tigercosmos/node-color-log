@@ -1,5 +1,4 @@
-const Logger = require('../index');
-const logger = new Logger();
+const logger = require('../index');
 
 logger.debug('logger.debug() prints prefix "DEBUG: " with background and text in color cyan');
 logger.error('logger.error() prints prefix "ERROR: " with background and text in color red');

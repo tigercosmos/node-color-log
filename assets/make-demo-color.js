@@ -1,5 +1,4 @@
-const Logger = require('../index');
-const logger = new Logger();
+const logger = require('../index');
 
 logger.fontColorLog('red', "logger.fontColorLog('red', message)");
 logger.fontColorLog(
