@@ -30,7 +30,8 @@ const CONFIG = {
         cyan: "\x1b[46m",
         white: "\x1b[47m"
     }
-}
+},
+LEVELS = ["error", "info", "debug", "warn"];
 
 class Logger {
     constructor() {
@@ -38,6 +39,23 @@ class Logger {
         this.command = '';
         // Last line
         this.lastCommand = '';
+    }
+
+    setLevel(level) {
+        if (this.isLevelValid(level)){
+            this.level = level;
+        } else {
+            throw "Level you are trying to set is invalid";
+        }
+
+    }
+
+    isLevelValid(level){
+        return LEVELS.includes(level);
+    }
+
+    isAllowedLevel(level){
+        return this.level ? this.level == level : true
     }
 
     log(text) {
@@ -169,31 +187,40 @@ class Logger {
     }
 
     error(text) {
-        const d = (new Date()).toISOString();
-        this.log(d + " ").joint()
-            .bgColor('red').log('[ERROR]').joint()
-            .color('red').log(" " + text);
+        if (this.isAllowedLevel("error")) {
+            const d = (new Date()).toISOString();
+            this.log(d + " ").joint()
+                .bgColor('red').log('[ERROR]').joint()
+                .color('red').log(" " + text);
+
+        }
     }
 
     warn(text) {
-        const d = (new Date()).toISOString();
-        this.log(d + " ").joint()
-            .bgColor('yellow').log('[WARN]').joint()
-            .color('yellow').log(" " + text);
+        if (this.sAllowedLevel("warn")) {
+            const d = (new Date()).toISOString();
+            this.log(d + " ").joint()
+                .bgColor('yellow').log('[WARN]').joint()
+                .color('yellow').log(" " + text);
+        }
     }
 
     info(text) {
-        const d = (new Date()).toISOString();
-        this.log(d + " ").joint()
-            .bgColor('green').log('[INFO]').joint()
-            .color('green').log(" " + text);
+        if (this.isAllowedLevel("info")) {
+            const d = (new Date()).toISOString();
+            this.log(d + " ").joint()
+                .bgColor('green').log('[INFO]').joint()
+                .color('green').log(" " + text);
+        }
     }
 
     debug(text) {
-        const d = (new Date()).toISOString();
-        this.log(d + " ").joint()
-            .bgColor('cyan').log('[DEBUG]').joint()
-            .color('cyan').log(" " + text);
+        if (this.isAllowedLevel("debug")) {
+            const d = (new Date()).toISOString();
+            this.log(d + " ").joint()
+                .bgColor('cyan').log('[DEBUG]').joint()
+                .color('cyan').log(" " + text);
+        }
     }
 
     checkSetting(setting) {
