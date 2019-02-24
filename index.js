@@ -197,7 +197,7 @@ class Logger {
     }
 
     warn(text) {
-        if (this.sAllowedLevel("warn")) {
+        if (this.isAllowedLevel("warn")) {
             const d = (new Date()).toISOString();
             this.log(d + " ").joint()
                 .bgColor('yellow').log('[WARN]').joint()
