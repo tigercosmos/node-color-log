@@ -37,7 +37,7 @@ Put the following code in your `js` in which you want to log.
 const logger = require('node-color-log');
 ```
 
-Logger level can be set like this. Logs belongs to this level will be printed.
+Logger level can be set like this. Logs belongs to this level and above that level will be printed.
 
 ```javascript
 logger.setLevel("error"); // it can be any log level.

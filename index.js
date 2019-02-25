@@ -1,37 +1,38 @@
 const CONFIG = {
-    SYSTEM: {
-        reset: "\x1b[0m",
-        bold: "\x1b[1m",
-        dim: "\x1b[2m",
-        italic: "\x1b[3m",
-        underscore: "\x1b[4m",
-        reverse: "\x1b[7m",
-        strikethrough: "\x1b[9m",
-        backoneline: "\x1b[1A",
-        cleanthisline: "\x1b[K"
+        SYSTEM: {
+            reset: "\x1b[0m",
+            bold: "\x1b[1m",
+            dim: "\x1b[2m",
+            italic: "\x1b[3m",
+            underscore: "\x1b[4m",
+            reverse: "\x1b[7m",
+            strikethrough: "\x1b[9m",
+            backoneline: "\x1b[1A",
+            cleanthisline: "\x1b[K"
+        },
+        FONT: {
+            black: "\x1b[30m",
+            red: "\x1b[31m",
+            green: "\x1b[32m",
+            yellow: "\x1b[33m",
+            blue: "\x1b[34m",
+            magenta: "\x1b[35m",
+            cyan: "\x1b[36m",
+            white: "\x1b[37m",
+        },
+        BACKGROUND: {
+            black: "\x1b[40m",
+            red: "\x1b[41m",
+            green: "\x1b[42m",
+            yellow: "\x1b[43m",
+            blue: "\x1b[44m",
+            magenta: "\x1b[45m",
+            cyan: "\x1b[46m",
+            white: "\x1b[47m"
+        }
     },
-    FONT: {
-        black: "\x1b[30m",
-        red: "\x1b[31m",
-        green: "\x1b[32m",
-        yellow: "\x1b[33m",
-        blue: "\x1b[34m",
-        magenta: "\x1b[35m",
-        cyan: "\x1b[36m",
-        white: "\x1b[37m",
-    },
-    BACKGROUND: {
-        black: "\x1b[40m",
-        red: "\x1b[41m",
-        green: "\x1b[42m",
-        yellow: "\x1b[43m",
-        blue: "\x1b[44m",
-        magenta: "\x1b[45m",
-        cyan: "\x1b[46m",
-        white: "\x1b[47m"
-    }
-},
-LEVELS = ["error", "info", "debug", "warn"];
+    // Sequence of levels is important.
+    LEVELS = ["info", "debug", "warn", "error"];
 
 class Logger {
     constructor() {
@@ -42,7 +43,7 @@ class Logger {
     }
 
     setLevel(level) {
-        if (this.isLevelValid(level)){
+        if (this.isLevelValid(level)) {
             this.level = level;
         } else {
             throw "Level you are trying to set is invalid";
@@ -50,12 +51,12 @@ class Logger {
 
     }
 
-    isLevelValid(level){
+    isLevelValid(level) {
         return LEVELS.includes(level);
     }
 
-    isAllowedLevel(level){
-        return this.level ? this.level == level : true
+    isAllowedLevel(level) {
+      return this.level ? LEVELS.indexOf(this.level) <= LEVELS.indexOf(level) : true
     }
 
     log(text) {
