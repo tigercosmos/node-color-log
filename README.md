@@ -37,11 +37,20 @@ Put the following code in your `js` in which you want to log.
 const logger = require('node-color-log');
 ```
 
+Logger level can be set like this. Logs belongs to this level and above that level will be printed.
+
+```javascript
+logger.setLevel("error"); // it can be any log level.
+```  
+
+
+
 ### Some parameters:
 
 - `color` includes: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
 
 - `setting` is optional, which is only used in `colorLog`, `fontColorLog` and `bgColorlog`. Keys in `setting` need to be boolean, and false by defualt.
+
 
 ```javascript
 let color = 'red';
