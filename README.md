@@ -119,6 +119,15 @@ logger.warn(message);
 2018-08-14T18:23:09.838Z [WARN] This is warn mode
 ```
 
+### setLevel()
+
+If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden.
+
+```js
+logger.setLevel("debug"); // info < debug < warn < error
+logger.info("This `info` will be hidden");
+```
+
 To see more example, you can check `./test.js` or run `npm test` to see the result.
 
 ### Contribute

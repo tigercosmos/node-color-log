@@ -147,3 +147,20 @@ logger.bgColorLog('red', 'Wrong setting.', {
 logger.bgColorLog('red', 'Wrong setting.', {
     bold: 4
 });
+
+logger.log('*************************');
+logger.log('*** Test Level Usage ****');
+logger.log('*************************');
+logger.log('Set level to debug:');
+logger.setLevel("debug");
+logger.error('error show');
+logger.warn('warn show');
+logger.debug('debug show');
+logger.info('info will not show');
+
+logger.log('Set level to warn:');
+logger.setLevel("warn");
+logger.error('error show');
+logger.warn('warn show');
+logger.debug('debug will not show');
+logger.info('info will not show');
