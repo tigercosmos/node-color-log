@@ -1,3 +1,6 @@
+2.2.0
+- add setLevel
+
 2.1.2
 - update README and demo image
 
