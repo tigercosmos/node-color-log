@@ -43,14 +43,11 @@ Logger level can be set like this. Logs belongs to this level and above that lev
 logger.setLevel("error"); // it can be any log level.
 ```  
 
-
-
 ### Some parameters:
 
 - `color` includes: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
 
-- `setting` is optional, which is only used in `colorLog`, `fontColorLog` and `bgColorlog`. Keys in `setting` need to be boolean, and false by defualt.
-
+- `setting` is optional, which is only used in `colorLog`, `fontColorLog` and `bgColorlog`. Keys in `setting` need to be boolean, and false by default.
 
 ```javascript
 let color = 'red';
@@ -128,6 +125,6 @@ To see more example, you can check `./test.js` or run `npm test` to see the resu
 
 Any issues and PRs are very welcome!
 
-### Lisense
+### License
 
 MIT

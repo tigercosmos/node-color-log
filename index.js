@@ -56,7 +56,7 @@ class Logger {
     }
 
     isAllowedLevel(level) {
-      return this.level ? LEVELS.indexOf(this.level) <= LEVELS.indexOf(level) : true
+        return this.level ? LEVELS.indexOf(this.level) <= LEVELS.indexOf(level) : true
     }
 
     log(text) {
@@ -78,7 +78,7 @@ class Logger {
         this.command = '';
 
         // if joint more than twice, we should clean the previous
-        // backline command, since we shoud only do it for the 
+        // backline command, since we should only do it for the 
         // current time.
         this.lastCommand = this.lastCommand.replace(CONFIG.SYSTEM.backoneline, "");
 
