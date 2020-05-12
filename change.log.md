@@ -1,3 +1,6 @@
+3.0.0
+- change log level order
+
 2.2.0
 - add setLevel
 
