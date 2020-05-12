@@ -32,7 +32,7 @@ const CONFIG = {
         }
     },
     // Sequence of levels is important.
-    LEVELS = ["info", "debug", "warn", "error"];
+    LEVELS = ["debug", "info", "warn", "error"];
 
 class Logger {
     constructor() {

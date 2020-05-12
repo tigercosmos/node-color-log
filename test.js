@@ -155,12 +155,26 @@ logger.log('Set level to debug:');
 logger.setLevel("debug");
 logger.error('error show');
 logger.warn('warn show');
+logger.info('info show');
 logger.debug('debug show');
-logger.info('info will not show');
+
+logger.log('Set level to info:');
+logger.setLevel("info");
+logger.error('error show');
+logger.warn('warn show');
+logger.info('info show');
+logger.debug('debug will not show');
 
 logger.log('Set level to warn:');
 logger.setLevel("warn");
 logger.error('error show');
 logger.warn('warn show');
-logger.debug('debug will not show');
 logger.info('info will not show');
+logger.debug('debug will not show');
+
+logger.log('Set level to error:');
+logger.setLevel("error");
+logger.error('error show');
+logger.warn('warn will not show');
+logger.info('info will not show');
+logger.debug('debug will not show');
