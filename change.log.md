@@ -1,3 +1,6 @@
+3.0.1
+- update CI & add npmignore
+
 3.0.0
 - change log level order
 
