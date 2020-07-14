@@ -101,13 +101,13 @@ logger.colorLog({
 With prefix that has background color
 
 ```javascript
-// debug level, with prefix "DEBUG: "
+// debug level, with prefix "[DEBUG]"
 logger.debug(message);
-// Error level, with prefix "ERROR: "
+// Error level, with prefix "[ERROR]"
 logger.error(message);
-// Info level, with prefix "INFO: "
+// Info level, with prefix "[INFO]"
 logger.info(message);
-// Warn level, with prefix "WARN: "
+// Warn level, with prefix "[WARN]"
 logger.warn(message);
 ```
 
@@ -123,8 +123,8 @@ logger.warn(message);
 If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden.
 
 ```js
-logger.setLevel("debug"); // info < debug < warn < error
-logger.info("This `info` will be hidden");
+logger.setLevel("info"); //  debug < info < warn < error
+logger.debug("This `debug` will be hidden");
 ```
 
 To see more example, you can check `./test.js` or run `npm test` to see the result.
