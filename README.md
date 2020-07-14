@@ -44,13 +44,17 @@ logger.setLevel("error"); // it can be any log level.
 
 ### Some parameters:
 
+These are the argument definition used by the logger functions:
+
+- `message` put into logger need to be a string.
+
 - `color` includes: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
 
-- `setting` is optional, which is only used in `colorLog`, `fontColorLog` and `bgColorlog`. Keys in `setting` need to be boolean, and false by default.
+- `setting` is optional, which is only used in `colorLog`, `fontColorLog` and `bgColorlog`. Keys in `setting` need to be boolean, and all are `false` by default.
 
 ```javascript
-let color = 'red';
-let message = 'anything you will put into console.log';
+const color = 'red';
+const message = 'any string you will put into console.log';
 const setting = {
     bold: true,
     dim: true,
@@ -118,7 +122,7 @@ logger.warn(message);
 2018-08-14T18:23:09.838Z [WARN] This is warn mode
 ```
 
-### setLevel()
+### `setLevel()`
 
 If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden.
 

@@ -1,3 +1,6 @@
+3.0.3
+- update readme
+
 3.0.2
 - update readme
 
