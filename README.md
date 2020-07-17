@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tigercosmos/node-color-log.svg?branch=master)](https://travis-ci.org/tigercosmos/node-color-log)
 [![npm version](https://badge.fury.io/js/node-color-log.svg)](https://badge.fury.io/js/node-color-log)
-[![Greenkeeper badge](https://badges.greenkeeper.io/tigercosmos/node-color-log.svg)](https://greenkeeper.io/)
+[![npm downloads](https://badgen.now.sh/npm/dm/node-color-log)](https://www.npmjs.com/package/node-color-log)
 
 # Node Color Log
 
