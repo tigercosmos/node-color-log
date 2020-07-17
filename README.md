@@ -122,7 +122,7 @@ logger.warn(message);
 2018-08-14T18:23:09.838Z [WARN] This is warn mode
 ```
 
-### `setLevel()`
+### `setLevel()` & `LOGGER` environment variable
 
 If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden.
 
@@ -130,6 +130,8 @@ If you want to set mask for levels, simply add the line at the front. Levels bel
 logger.setLevel("info"); //  debug < info < warn < error
 logger.debug("This `debug` will be hidden");
 ```
+
+Or, you can set the environment variable `LOGGER`, such as `LOGGER=info npm start`, where it's equal to `setLevel("info")`.
 
 To see more example, you can check `./test.js` or run `npm test` to see the result.
 
