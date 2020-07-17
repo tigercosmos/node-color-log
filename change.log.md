@@ -1,3 +1,6 @@
+4.0.0
+- add LOGGER environment variable as level setter
+
 3.0.3
 - update readme
 
