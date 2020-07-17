@@ -40,6 +40,12 @@ class Logger {
         this.command = '';
         // Last line
         this.lastCommand = '';
+
+        // set level from env
+        const level = process.env.LOGGER;
+        if (this.isLevelValid(level)) {
+            this.level = level;
+        }
     }
 
     setLevel(level) {
