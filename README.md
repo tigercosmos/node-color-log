@@ -6,9 +6,9 @@
 
 # Node Color Log
 
-The more powerful logger for NodeJS.
+The more powerful JavaScript logger for NodeJS and browsers.
 
-`node-color-log` is a package for NodeJS. It provides more functions than the origin `console.log`. You can log text with colorful font and colorful background. Also, it has four levels log, including `debug`, `info`, `warn`and `error`. Give you much better experience while developing NodeJS projects.
+`node-color-log` is a logger package for NodeJS and browsers. It provides more functions than the origin `console.log`. You can log text with colorful font and colorful background. Also, it has 4 levels log, including `debug`, `info`, `warn`and `error`. Give you much better experience while developing JavaScript projects.
 
 ## Demo
 
@@ -40,17 +40,47 @@ Logger level can be set like this. Logs belongs to this level and above that lev
 
 ```javascript
 logger.setLevel("error"); // it can be any log level.
-```  
+```
 
-### Some parameters:
+## API
 
-These are the argument definition used by the logger functions:
+### `log()`
 
-- `message` put into logger need to be a string.
+log with attributes, the order of setters can change.
 
-- `color` includes: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
+**NOTE:** `log()` need to put behind of attribute setter(at the end).
 
-- `setting` is optional, which is only used in `colorLog`, `fontColorLog` and `bgColorlog`. Keys in `setting` need to be boolean, and all are `false` by default.
+`joint()` can connect different style of message in a line.
+
+`color()` and `bgColor()` includes: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
+
+Usage:
+
+```javascript
+// normal log
+logger.log(message)
+// Attribute log
+logger.color('red').bgColor('blue')
+      .bold().italic().dim().reverse().underscore().strikethrough()
+      .log(message);
+// Joint log
+logger.color('red').bold().log(message_style_1).joint()
+      .bgColor('white').italic().log(message_style_2).joint()
+      .strikethrough().log(message_style_3);
+
+// log multiple arguments
+logger.log(obj1, arr2, str3);
+```
+
+### `fontColorLog()`, `bgColorLog()`, `colorLog()`
+
+- `message` here must be a string.
+
+- Color includes: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
+
+- `setting` is optional. Keys in `setting` need to be boolean, and all are `false` by default.
+
+Parameters:
 
 ```javascript
 const color = 'red';
@@ -65,28 +95,7 @@ const setting = {
 }
 ```
 
-### `log()`
-
-log with attributes, the order of setters can change.
-
-**NOTE:** `log()` need to put behind of attribute setter(at the end).
-
-`joint()` can connect different style of message in a line.
-
-```javascript
-// normal log
-logger.log(message)
-// Attribute log
-logger.color('red').bgColor('blue')
-      .bold().italic().dim().reverse().underscore().strikethrough()
-      .log(message);
-// Joint log
-logger.color('red').bold().log(message_style_1).joint()
-      .bgColor('white').italic().log(message_style_2).joint()
-      .strikethrough().log(message_style_3);
-```
-
-### `fontColorLog()`, `bgColorLog()`, `colorLog()`
+Usage:
 
 ```javascript
 // only set font color
@@ -104,6 +113,8 @@ logger.colorLog({
 
 With prefix that has background color
 
+Usage:
+
 ```javascript
 // debug level, with prefix "[DEBUG]"
 logger.debug(message);
@@ -113,7 +124,12 @@ logger.error(message);
 logger.info(message);
 // Warn level, with prefix "[WARN]"
 logger.warn(message);
+
+// Level logs enable multiple arguments
+logger.debug(obj1, arr2, str3);
 ```
+
+The output looks like:
 
 ```log
 2018-08-14T18:23:09.837Z [DEBUG] This is debug mode
@@ -124,7 +140,7 @@ logger.warn(message);
 
 ### `setLevel()` & `LOGGER` environment variable
 
-If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden.
+If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden. There are four levels, which are `debug`, `info`, `warn`, `error` in lower-case.
 
 ```js
 logger.setLevel("info"); //  debug < info < warn < error
@@ -133,10 +149,27 @@ logger.debug("This `debug` will be hidden");
 
 Or, you can set the environment variable `LOGGER`, such as `LOGGER=info npm start`, where it's equal to `setLevel("info")`.
 
-If you don't want the level logs have color, you can set the following:
+
+### `setLevelNoColor()`, `setLevelColor()`
+
+Level logs print in colors as a default.
+
+You can set `setLevelNoColor()` to turn off the setting, and use `setLevelColor()` to reverse it.
+
+None color mode is helpful for the text logger or browser environments.
 
 ```js
 logger.setLevelNoColor();
+```
+
+### Log Files
+
+If you want to save the logs to files, you can use shell pipes:
+
+For example, it saves logs belonged and above `warn` to `log.txt`:
+
+```shell
+$ LOGGER=warn node index.js > log.txt
 ```
 
 To see more example, you can check `./test.js` or run `npm test` to see the result.

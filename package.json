@@ -1,7 +1,7 @@
 {
   "name": "node-color-log",
-  "version": "4.0.0",
-  "description": "More powerful logger for NodeJs",
+  "version": "5.0.0",
+  "description": "The more powerful JavaScript logger for NodeJS and browsers.",
   "main": "index.js",
   "scripts": {
     "test": "node test.js && LOGGER=info node test2.js"
@@ -21,5 +21,5 @@
   "bugs": {
     "url": "https://github.com/tigercosmos/node-color-log/issues"
   },
-  "homepage": "https://github.com/tigercosmos/node-color-log#readme"
+  "homepage": "https://github.com/tigercosmos/node-color-log"
 }

@@ -179,11 +179,22 @@ logger.warn('warn will not show');
 logger.info('info will not show');
 logger.debug('debug will not show');
 
+logger.log('****************************');
+logger.log('*** Test Level No Color ****');
+logger.log('****************************');
 logger.setLevelNoColor();
 logger.setLevel("debug");
-logger.log('Test level no color:');
 logger.setLevel("debug");
 logger.error('error show');
 logger.warn('warn show');
 logger.info('info show');
 logger.debug('debug show');
+
+logger.log('*************************************');
+logger.log('*** Test Level Multiple Arguments ***');
+logger.log('*************************************');
+logger.setLevelColor();
+logger.error('error show', 'error show 2');
+logger.warn('warn show', {a: 1, b: 2});
+logger.info('info show', {a: [1, 2, 4]}, [4, 4, 4]);
+logger.debug('debug show', [1, 2, 3]);

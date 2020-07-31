@@ -63,6 +63,10 @@ class Logger {
         this.noColor = true;
     }
 
+    setLevelColor() {
+        this.noColor = false;
+    }
+
     isLevelValid(level) {
         return LEVELS.includes(level);
     }
@@ -71,8 +75,20 @@ class Logger {
         return this.level ? LEVELS.indexOf(this.level) <= LEVELS.indexOf(level) : true
     }
 
-    log(text) {
-        this.command += text;
+    log(...args) {
+
+        for (const idx in args) {
+            const arg = args[idx];
+            if (typeof arg === "string") {
+                this.command += arg;
+            } else {
+                this.command += JSON.stringify(arg);
+            }
+            if (args.length > 1 && idx < args.length - 1) {
+                this.command += " ";
+            }
+        }
+
         this.command += CONFIG.SYSTEM.reset;
         console.log(this.command);
         // Save last command if we need to use for joint
@@ -159,9 +175,10 @@ class Logger {
         } else {
             this.warn("node-color-log: Font color not found! Use the default.")
         }
-        command += '%s';
+        command += text;
+
         command += CONFIG.SYSTEM.reset;
-        console.log(command, text);
+        console.log(command);
     }
 
     bgColorLog(ticket, text, setting) {
@@ -174,9 +191,10 @@ class Logger {
         } else {
             this.warn("node-color-log: Background color not found! Use the default.")
         }
-        command += '%s';
+        command += text;
+
         command += CONFIG.SYSTEM.reset;
-        console.log(command, text);
+        console.log(command);
     }
 
     colorLog(ticketObj, text, setting) {
@@ -194,71 +212,78 @@ class Logger {
         } else {
             this.warn("node-color-log: Background color not found! Use the default.")
         }
-        command += '%s';
+
+        command += text;
+
         command += CONFIG.SYSTEM.reset;
-        console.log(command, text);
+        console.log(command);
     }
 
-    error(text) {
+    error(...args) {
         if (this.isAllowedLevel("error")) {
             if (this.noColor) {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
-                    .log('[ERROR]').joint()
-                    .log(" " + text);
+                    .log('[ERROR] ').joint()
+                    .log(...args);
             } else {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
                     .bgColor('red').log('[ERROR]').joint()
-                    .color('red').log(" " + text);
+                    .log(" ").joint()
+                    .color('red').log(...args);
             }
         }
     }
 
-    warn(text) {
+    warn(...args) {
         if (this.isAllowedLevel("warn")) {
             if (this.noColor) {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
-                    .log('[WARN]').joint()
-                    .log(" " + text);
+                    .log('[WARN] ').joint()
+                    .log(...args);
             } else {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
                     .bgColor('yellow').log('[WARN]').joint()
-                    .color('yellow').log(" " + text);
+                    .log(" ").joint()
+                    .color('yellow').log(...args);
             }
         }
     }
 
-    info(text) {
+    info(...args) {
         if (this.isAllowedLevel("info")) {
             if (this.noColor) {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
-                    .log('[INFO]').joint()
-                    .log(" " + text);
+                    .log('[INFO] ').joint()
+                    .log(...args);
             } else {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
                     .bgColor('green').log('[INFO]').joint()
-                    .color('green').log(" " + text);
+                    .log(" ").joint()
+                    .color('green').log(...args);
             }
         }
     }
 
-    debug(text) {
+    debug(...args) {
         if (this.isAllowedLevel("debug")) {
             if (this.noColor) {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
-                    .log('[DEBUG]').joint()
-                    .log(" " + text);
+                    .log('[DEBUG] ').joint()
+                    .log(...args);
             } else {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
-                    .bgColor('cyan').log('[DEBUG]').joint()
-                    .color('cyan').log(" " + text);
+                    .bgColor('cyan').log("[DEBUG]").joint()
+                    .log(' ').joint()
+                    .color('cyan')
+                    .log(...args);
             }
         }
     }
@@ -279,6 +304,7 @@ class Logger {
         }
         return command;
     }
+
 }
 
 const logger = new Logger();

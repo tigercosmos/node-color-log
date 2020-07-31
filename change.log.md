@@ -1,3 +1,7 @@
+5.0.0
+- log(), debug(), info(), warn(), error(): support for multiple arguments
+- add setLevelNoColor(), setLevelColor()
+
 4.0.0
 - add LOGGER environment variable as level setter
 
