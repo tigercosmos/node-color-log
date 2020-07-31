@@ -178,3 +178,12 @@ logger.error('error show');
 logger.warn('warn will not show');
 logger.info('info will not show');
 logger.debug('debug will not show');
+
+logger.setLevelNoColor();
+logger.setLevel("debug");
+logger.log('Test level no color:');
+logger.setLevel("debug");
+logger.error('error show');
+logger.warn('warn show');
+logger.info('info show');
+logger.debug('debug show');

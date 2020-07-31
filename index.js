@@ -46,6 +46,8 @@ class Logger {
         if (this.isLevelValid(level)) {
             this.level = level;
         }
+
+        this.noColor = false;
     }
 
     setLevel(level) {
@@ -55,6 +57,10 @@ class Logger {
             throw "Level you are trying to set is invalid";
         }
 
+    }
+
+    setLevelNoColor() {
+        this.noColor = true;
     }
 
     isLevelValid(level) {
@@ -195,38 +201,65 @@ class Logger {
 
     error(text) {
         if (this.isAllowedLevel("error")) {
-            const d = (new Date()).toISOString();
-            this.log(d + " ").joint()
-                .bgColor('red').log('[ERROR]').joint()
-                .color('red').log(" " + text);
-
+            if (this.noColor) {
+                const d = (new Date()).toISOString();
+                this.log(d + " ").joint()
+                    .log('[ERROR]').joint()
+                    .log(" " + text);
+            } else {
+                const d = (new Date()).toISOString();
+                this.log(d + " ").joint()
+                    .bgColor('red').log('[ERROR]').joint()
+                    .color('red').log(" " + text);
+            }
         }
     }
 
     warn(text) {
         if (this.isAllowedLevel("warn")) {
-            const d = (new Date()).toISOString();
-            this.log(d + " ").joint()
-                .bgColor('yellow').log('[WARN]').joint()
-                .color('yellow').log(" " + text);
+            if (this.noColor) {
+                const d = (new Date()).toISOString();
+                this.log(d + " ").joint()
+                    .log('[WARN]').joint()
+                    .log(" " + text);
+            } else {
+                const d = (new Date()).toISOString();
+                this.log(d + " ").joint()
+                    .bgColor('yellow').log('[WARN]').joint()
+                    .color('yellow').log(" " + text);
+            }
         }
     }
 
     info(text) {
         if (this.isAllowedLevel("info")) {
-            const d = (new Date()).toISOString();
-            this.log(d + " ").joint()
-                .bgColor('green').log('[INFO]').joint()
-                .color('green').log(" " + text);
+            if (this.noColor) {
+                const d = (new Date()).toISOString();
+                this.log(d + " ").joint()
+                    .log('[INFO]').joint()
+                    .log(" " + text);
+            } else {
+                const d = (new Date()).toISOString();
+                this.log(d + " ").joint()
+                    .bgColor('green').log('[INFO]').joint()
+                    .color('green').log(" " + text);
+            }
         }
     }
 
     debug(text) {
         if (this.isAllowedLevel("debug")) {
-            const d = (new Date()).toISOString();
-            this.log(d + " ").joint()
-                .bgColor('cyan').log('[DEBUG]').joint()
-                .color('cyan').log(" " + text);
+            if (this.noColor) {
+                const d = (new Date()).toISOString();
+                this.log(d + " ").joint()
+                    .log('[DEBUG]').joint()
+                    .log(" " + text);
+            } else {
+                const d = (new Date()).toISOString();
+                this.log(d + " ").joint()
+                    .bgColor('cyan').log('[DEBUG]').joint()
+                    .color('cyan').log(" " + text);
+            }
         }
     }
 

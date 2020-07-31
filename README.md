@@ -133,6 +133,12 @@ logger.debug("This `debug` will be hidden");
 
 Or, you can set the environment variable `LOGGER`, such as `LOGGER=info npm start`, where it's equal to `setLevel("info")`.
 
+If you don't want the level logs have color, you can set the following:
+
+```js
+logger.setLevelNoColor();
+```
+
 To see more example, you can check `./test.js` or run `npm test` to see the result.
 
 ### Contribute
