@@ -156,7 +156,7 @@ Level logs print in colors as a default.
 
 You can set `setLevelNoColor()` to turn off the setting, and use `setLevelColor()` to reverse it.
 
-None color mode is helpful for the text logger or browser environments.
+None color mode is helpful for text files or browser environments.
 
 ```js
 logger.setLevelNoColor();
