@@ -184,7 +184,6 @@ logger.log('*** Test Level No Color ****');
 logger.log('****************************');
 logger.setLevelNoColor();
 logger.setLevel("debug");
-logger.setLevel("debug");
 logger.error('error show');
 logger.warn('warn show');
 logger.info('info show');
