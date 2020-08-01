@@ -89,7 +89,9 @@ class Logger {
             }
         }
 
-        this.command += CONFIG.SYSTEM.reset;
+        if (!this.noColor) {
+            this.command += CONFIG.SYSTEM.reset;
+        }
         console.log(this.command);
         // Save last command if we need to use for joint
         this.lastCommand = this.command;
@@ -223,9 +225,7 @@ class Logger {
         if (this.isAllowedLevel("error")) {
             if (this.noColor) {
                 const d = (new Date()).toISOString();
-                this.log(d + " ").joint()
-                    .log('[ERROR] ').joint()
-                    .log(...args);
+                this.log(d, " [ERROR] ", ...args);
             } else {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
@@ -240,9 +240,7 @@ class Logger {
         if (this.isAllowedLevel("warn")) {
             if (this.noColor) {
                 const d = (new Date()).toISOString();
-                this.log(d + " ").joint()
-                    .log('[WARN] ').joint()
-                    .log(...args);
+                this.log(d, " [WARN] ", ...args);
             } else {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
@@ -257,9 +255,7 @@ class Logger {
         if (this.isAllowedLevel("info")) {
             if (this.noColor) {
                 const d = (new Date()).toISOString();
-                this.log(d + " ").joint()
-                    .log('[INFO] ').joint()
-                    .log(...args);
+                this.log(d, " [INFO] ", ...args);
             } else {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
@@ -274,9 +270,7 @@ class Logger {
         if (this.isAllowedLevel("debug")) {
             if (this.noColor) {
                 const d = (new Date()).toISOString();
-                this.log(d + " ").joint()
-                    .log('[DEBUG] ').joint()
-                    .log(...args);
+                this.log(d, " [DEBUG] ", ...args);
             } else {
                 const d = (new Date()).toISOString();
                 this.log(d + " ").joint()
