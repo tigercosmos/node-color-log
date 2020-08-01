@@ -1,3 +1,6 @@
+5.1.0
+- fix none color mode not pure text
+
 5.0.0
 - log(), debug(), info(), warn(), error(): support for multiple arguments
 - add setLevelNoColor(), setLevelColor()
