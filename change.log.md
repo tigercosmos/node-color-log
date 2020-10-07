@@ -1,3 +1,6 @@
+5.2.0
+- support TypeScript (may require `--esModuleInterop` flag)
+
 5.1.0
 - fix none color mode not pure text
 
