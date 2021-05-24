@@ -140,10 +140,10 @@ The output looks like:
 
 ### `setLevel()` & `LOGGER` environment variable
 
-If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden. There are four levels, which are `debug`, `info`, `warn`, `error` in lower-case.
+If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden. There are four levels, which are `debug`, `info`, `warn`, `error`, or `disable` in lower-case.
 
 ```js
-logger.setLevel("info"); //  debug < info < warn < error
+logger.setLevel("info"); //  debug < info < warn < error < disable
 logger.debug("This `debug` will be hidden");
 ```
 

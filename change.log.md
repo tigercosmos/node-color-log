@@ -1,3 +1,6 @@
+5.3.0
+- support `disable` for levels
+
 5.2.0
 - support TypeScript (may require `--esModuleInterop` flag)
 

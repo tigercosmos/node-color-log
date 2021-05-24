@@ -1,38 +1,39 @@
 const CONFIG = {
-        SYSTEM: {
-            reset: "\x1b[0m",
-            bold: "\x1b[1m",
-            dim: "\x1b[2m",
-            italic: "\x1b[3m",
-            underscore: "\x1b[4m",
-            reverse: "\x1b[7m",
-            strikethrough: "\x1b[9m",
-            backoneline: "\x1b[1A",
-            cleanthisline: "\x1b[K"
-        },
-        FONT: {
-            black: "\x1b[30m",
-            red: "\x1b[31m",
-            green: "\x1b[32m",
-            yellow: "\x1b[33m",
-            blue: "\x1b[34m",
-            magenta: "\x1b[35m",
-            cyan: "\x1b[36m",
-            white: "\x1b[37m",
-        },
-        BACKGROUND: {
-            black: "\x1b[40m",
-            red: "\x1b[41m",
-            green: "\x1b[42m",
-            yellow: "\x1b[43m",
-            blue: "\x1b[44m",
-            magenta: "\x1b[45m",
-            cyan: "\x1b[46m",
-            white: "\x1b[47m"
-        }
+    SYSTEM: {
+        reset: "\x1b[0m",
+        bold: "\x1b[1m",
+        dim: "\x1b[2m",
+        italic: "\x1b[3m",
+        underscore: "\x1b[4m",
+        reverse: "\x1b[7m",
+        strikethrough: "\x1b[9m",
+        backoneline: "\x1b[1A",
+        cleanthisline: "\x1b[K"
     },
-    // Sequence of levels is important.
-    LEVELS = ["debug", "info", "warn", "error"];
+    FONT: {
+        black: "\x1b[30m",
+        red: "\x1b[31m",
+        green: "\x1b[32m",
+        yellow: "\x1b[33m",
+        blue: "\x1b[34m",
+        magenta: "\x1b[35m",
+        cyan: "\x1b[36m",
+        white: "\x1b[37m",
+    },
+    BACKGROUND: {
+        black: "\x1b[40m",
+        red: "\x1b[41m",
+        green: "\x1b[42m",
+        yellow: "\x1b[43m",
+        blue: "\x1b[44m",
+        magenta: "\x1b[45m",
+        cyan: "\x1b[46m",
+        white: "\x1b[47m"
+    }
+};
+
+// Sequence of levels is important.
+const LEVELS = ["debug", "info", "warn", "error", "disable"];
 
 class Logger {
     constructor() {
@@ -222,63 +223,67 @@ class Logger {
     }
 
     error(...args) {
-        if (this.isAllowedLevel("error")) {
-            if (this.noColor) {
-                const d = (new Date()).toISOString();
-                this.log(d, " [ERROR] ", ...args);
-            } else {
-                const d = (new Date()).toISOString();
-                this.log(d + " ").joint()
-                    .bgColor('red').log('[ERROR]').joint()
-                    .log(" ").joint()
-                    .color('red').log(...args);
-            }
+        if (!this.isAllowedLevel("error"))
+            return;
+
+        if (this.noColor) {
+            const d = (new Date()).toISOString();
+            this.log(d, " [ERROR] ", ...args);
+        } else {
+            const d = (new Date()).toISOString();
+            this.log(d + " ").joint()
+                .bgColor('red').log('[ERROR]').joint()
+                .log(" ").joint()
+                .color('red').log(...args);
         }
     }
 
     warn(...args) {
-        if (this.isAllowedLevel("warn")) {
-            if (this.noColor) {
-                const d = (new Date()).toISOString();
-                this.log(d, " [WARN] ", ...args);
-            } else {
-                const d = (new Date()).toISOString();
-                this.log(d + " ").joint()
-                    .bgColor('yellow').log('[WARN]').joint()
-                    .log(" ").joint()
-                    .color('yellow').log(...args);
-            }
+        if (!this.isAllowedLevel("warn"))
+            return;
+
+        if (this.noColor) {
+            const d = (new Date()).toISOString();
+            this.log(d, " [WARN] ", ...args);
+        } else {
+            const d = (new Date()).toISOString();
+            this.log(d + " ").joint()
+                .bgColor('yellow').log('[WARN]').joint()
+                .log(" ").joint()
+                .color('yellow').log(...args);
         }
     }
 
     info(...args) {
-        if (this.isAllowedLevel("info")) {
-            if (this.noColor) {
-                const d = (new Date()).toISOString();
-                this.log(d, " [INFO] ", ...args);
-            } else {
-                const d = (new Date()).toISOString();
-                this.log(d + " ").joint()
-                    .bgColor('green').log('[INFO]').joint()
-                    .log(" ").joint()
-                    .color('green').log(...args);
-            }
+        if (!this.isAllowedLevel("info"))
+            return;
+
+        if (this.noColor) {
+            const d = (new Date()).toISOString();
+            this.log(d, " [INFO] ", ...args);
+        } else {
+            const d = (new Date()).toISOString();
+            this.log(d + " ").joint()
+                .bgColor('green').log('[INFO]').joint()
+                .log(" ").joint()
+                .color('green').log(...args);
         }
     }
 
     debug(...args) {
-        if (this.isAllowedLevel("debug")) {
-            if (this.noColor) {
-                const d = (new Date()).toISOString();
-                this.log(d, " [DEBUG] ", ...args);
-            } else {
-                const d = (new Date()).toISOString();
-                this.log(d + " ").joint()
-                    .bgColor('cyan').log("[DEBUG]").joint()
-                    .log(' ').joint()
-                    .color('cyan')
-                    .log(...args);
-            }
+        if (!this.isAllowedLevel("debug"))
+            return;
+
+        if (this.noColor) {
+            const d = (new Date()).toISOString();
+            this.log(d, " [DEBUG] ", ...args);
+        } else {
+            const d = (new Date()).toISOString();
+            this.log(d + " ").joint()
+                .bgColor('cyan').log("[DEBUG]").joint()
+                .log(' ').joint()
+                .color('cyan')
+                .log(...args);
         }
     }
 
