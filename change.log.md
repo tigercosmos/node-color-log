@@ -1,3 +1,6 @@
+5.3.1
+- fix typescript declaration
+
 5.3.0
 - support `disable` for levels
 

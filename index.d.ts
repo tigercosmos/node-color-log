@@ -1,4 +1,4 @@
-type level = "debug" | "info" | "warn" | "error";
+type level = "debug" | "info" | "warn" | "error" | "disable";
 
 type setting = "bold" | "italic" | "dim" | "underscore" | "reverse" | "strikethrough";
 
