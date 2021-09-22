@@ -50,7 +50,7 @@ class Logger {
 
         this.noColor = false;
 
-        this._getDate = () => this.getDate()
+        this._getDate = () => (new Date()).toISOString();
     }
 
     setLevel(level) {
