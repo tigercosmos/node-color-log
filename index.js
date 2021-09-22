@@ -49,6 +49,8 @@ class Logger {
         }
 
         this.noColor = false;
+
+        this._getDate = () => this.getDate()
     }
 
     setLevel(level) {
@@ -109,7 +111,7 @@ class Logger {
         this.command = '';
 
         // if joint more than twice, we should clean the previous
-        // backline command, since we should only do it for the 
+        // backline command, since we should only do it for the
         // current time.
         this.lastCommand = this.lastCommand.replace(CONFIG.SYSTEM.backoneline, "");
 
@@ -118,6 +120,14 @@ class Logger {
 
         this.command += this.lastCommand;
         return this;
+    }
+
+    setDate(callback) {
+        this._getDate = callback
+    }
+
+    getDate() {
+        return this._getDate()
     }
 
     color(ticket) {
@@ -227,10 +237,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = (new Date()).toISOString();
+            const d = this.getDate();
             this.log(d, " [ERROR] ", ...args);
         } else {
-            const d = (new Date()).toISOString();
+            const d = this.getDate();
             this.log(d + " ").joint()
                 .bgColor('red').log('[ERROR]').joint()
                 .log(" ").joint()
@@ -243,10 +253,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = (new Date()).toISOString();
+            const d = this.getDate();
             this.log(d, " [WARN] ", ...args);
         } else {
-            const d = (new Date()).toISOString();
+            const d = this.getDate();
             this.log(d + " ").joint()
                 .bgColor('yellow').log('[WARN]').joint()
                 .log(" ").joint()
@@ -259,10 +269,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = (new Date()).toISOString();
+            const d = this.getDate();
             this.log(d, " [INFO] ", ...args);
         } else {
-            const d = (new Date()).toISOString();
+            const d = this.getDate();
             this.log(d + " ").joint()
                 .bgColor('green').log('[INFO]').joint()
                 .log(" ").joint()
@@ -275,10 +285,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = (new Date()).toISOString();
+            const d = this.getDate();
             this.log(d, " [DEBUG] ", ...args);
         } else {
-            const d = (new Date()).toISOString();
+            const d = this.getDate();
             this.log(d + " ").joint()
                 .bgColor('cyan').log("[DEBUG]").joint()
                 .log(' ').joint()
