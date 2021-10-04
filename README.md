@@ -162,6 +162,15 @@ None color mode is helpful for text files or browser environments.
 logger.setLevelNoColor();
 ```
 
+### `setDate()`
+
+The default time format is `toISOString`, but you can change it by using `setDate(callback)`
+
+```
+logger.setDate(() => (new Date()).toLocaleTimeString())
+logger.info("This is an info message") // 5:17:59 pm [INFO] This is an info message
+```
+
 ### Log Files
 
 If you want to save the logs to files, you can use shell pipes:

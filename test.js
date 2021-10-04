@@ -197,3 +197,10 @@ logger.error('error show', 'error show 2');
 logger.warn('warn show', {a: 1, b: 2});
 logger.info('info show', {a: [1, 2, 4]}, [4, 4, 4]);
 logger.debug('debug show', [1, 2, 3]);
+
+logger.log('*************************************');
+logger.log('***      Test Date Format         ***');
+logger.log('*************************************');
+logger.setLevel("info");
+logger.setDate(() => (new Date()).toLocaleTimeString())
+logger.info("This is an info message") // 5:17:59 pm [INFO] This is an info message

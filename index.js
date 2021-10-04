@@ -123,11 +123,11 @@ class Logger {
     }
 
     setDate(callback) {
-        this._getDate = callback
+        this._getDate = callback;
     }
 
     getDate() {
-        return this._getDate()
+        return this._getDate();
     }
 
     color(ticket) {

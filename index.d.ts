@@ -32,6 +32,10 @@ declare class Logger {
     checkSetting(setting: settingObject): string;
 
     joint(): Logger;
+
+    setDate(callback: Function): void;
+
+    getDate(): string;
     
     color(ticket: color): Logger;
     

@@ -1,3 +1,6 @@
+6.0.0
+- add `setDate` and `getDate`
+
 5.3.1
 - fix typescript declaration
 
