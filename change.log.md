@@ -1,3 +1,6 @@
+7.0.0
+- fix TypeScript types
+
 6.0.0
 - add `setDate` and `getDate`
 
