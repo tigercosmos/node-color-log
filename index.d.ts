@@ -1,16 +1,16 @@
-type level = "debug" | "info" | "warn" | "error" | "disable";
+export type LEVEL = "debug" | "info" | "warn" | "error" | "disable";
 
-type setting = "bold" | "italic" | "dim" | "underscore" | "reverse" | "strikethrough";
+export type SETTING = "bold" | "italic" | "dim" | "underscore" | "reverse" | "strikethrough";
 
-type color = "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white";
+export type COLOR = "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white";
 
 type ticketObject = {
-    font?: color,
-    bg?: color,
+    font?: COLOR,
+    bg?: COLOR,
 }
 
 type settingObject = {
-    [key in setting]?: boolean;
+    [key in SETTING]?: boolean;
 };
 
 declare class Logger {
@@ -19,15 +19,15 @@ declare class Logger {
     level: any;
     noColor: boolean;
 
-    setLevel(level: level): void;
+    setLevel(level: LEVEL): void;
 
     setLevelNoColor(): void;
 
     setLevelColor(): void;
 
-    isLevelValid(level: level): boolean;
+    isLevelValid(level: LEVEL): boolean;
 
-    isAllowedLevel(level: level): boolean;
+    isAllowedLevel(level: LEVEL): boolean;
 
     checkSetting(setting: settingObject): string;
 
@@ -37,9 +37,9 @@ declare class Logger {
 
     getDate(): string;
     
-    color(ticket: color): Logger;
+    color(ticket: COLOR): Logger;
     
-    bgColor(ticket: color): Logger;
+    bgColor(ticket: COLOR): Logger;
     
     bold(): Logger;
     
@@ -53,9 +53,9 @@ declare class Logger {
     
     italic(): Logger;
     
-    fontColorLog(ticket: color, text: string, setting?: settingObject): void;
+    fontColorLog(ticket: COLOR, text: string, setting?: settingObject): void;
     
-    bgColorLog(ticket: color, text: string, setting?: settingObject): void;
+    bgColorLog(ticket: COLOR, text: string, setting?: settingObject): void;
     
     colorLog(ticketObj: ticketObject, text: string, setting?: settingObject): void;
 
