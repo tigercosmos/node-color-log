@@ -149,9 +149,9 @@ If you want to set mask for levels, simply add the line at the front. Levels bel
 ```js
 logger.setLevel("info"); // success < debug < info < warn < error < disable
 logger.debug("This `debug` will be hidden");
+logger.error("This `error` will be shown");
 
 logger.setLevel("disable"); // hide every logs
-logger.success("However, you can use `success` to break the disable, so this line will be shown.");
 ```
 
 Or, you can set the environment variable `LOGGER`, such as `LOGGER=info npm start`, where it's equal to `setLevel("info")`.

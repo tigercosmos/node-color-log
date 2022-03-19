@@ -1,3 +1,6 @@
+9.0.0
+- modify `success()`
+
 8.0.1
 - revise README
 
