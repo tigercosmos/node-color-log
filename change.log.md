@@ -1,3 +1,7 @@
+8.0.0
+- add success option
+- increase label contrast
+
 7.0.0
 - fix TypeScript types
 
