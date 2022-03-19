@@ -109,21 +109,24 @@ logger.colorLog({
 }, message, setting);
 ```
 
-### `debug()`, `error()`, `info()`, `warn()`
+### `success()`, `debug()`, `info()`, `warn()`, `error()`
 
 With prefix that has background color
 
 Usage:
 
 ```javascript
+// Success level, with prefix "[SUCCESS]"
+logger.success(message);
 // debug level, with prefix "[DEBUG]"
 logger.debug(message);
-// Error level, with prefix "[ERROR]"
-logger.error(message);
 // Info level, with prefix "[INFO]"
 logger.info(message);
 // Warn level, with prefix "[WARN]"
 logger.warn(message);
+// Error level, with prefix "[ERROR]"
+logger.error(message);
+
 
 // Level logs enable multiple arguments
 logger.debug(obj1, arr2, str3);
@@ -132,18 +135,19 @@ logger.debug(obj1, arr2, str3);
 The output looks like:
 
 ```log
+2018-08-14T18:23:09.836Z [SUCCESS] This is success mode
 2018-08-14T18:23:09.837Z [DEBUG] This is debug mode
-2018-08-14T18:23:09.837Z [ERROR] This is error mode
 2018-08-14T18:23:09.838Z [INFO] This is info mode
 2018-08-14T18:23:09.838Z [WARN] This is warn mode
+2018-08-14T18:23:09.839Z [ERROR] This is error mode
 ```
 
 ### `setLevel()` & `LOGGER` environment variable
 
-If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden. There are four levels, which are `debug`, `info`, `warn`, `error`, or `disable` in lower-case.
+If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden. There are four levels, which are `success`, `debug`, `info`, `warn`, `error`, or `disable` in lower-case.
 
 ```js
-logger.setLevel("info"); //  debug < info < warn < error < disable < success
+logger.setLevel("info"); // success < debug < info < warn < error < disable
 logger.debug("This `debug` will be hidden");
 
 logger.setLevel("disable"); // hide every logs
