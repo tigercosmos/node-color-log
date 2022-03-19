@@ -33,7 +33,7 @@ const CONFIG = {
 };
 
 // Sequence of levels is important.
-const LEVELS = ["debug", "info", "warn", "error", "disable"];
+const LEVELS = ["debug", "info", "warn", "error", "disable", "success"];
 
 class Logger {
     constructor() {
@@ -293,6 +293,23 @@ class Logger {
                 .bgColor('cyan').log("[DEBUG]").joint()
                 .log(' ').joint()
                 .color('cyan')
+                .log(...args);
+        }
+    }
+
+    success(...args) {
+        if (!this.isAllowedLevel("success"))
+            return;
+
+        if (this.noColor) {
+            const d = this.getDate();
+            this.log(d, " [SUCCESS] ", ...args);
+        } else {
+            const d = this.getDate();
+            this.log(d + " ").joint()
+                .bgColor('green').log("[SUCCESS]").joint()
+                .log(' ').joint()
+                .color('green')
                 .log(...args);
         }
     }
