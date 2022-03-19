@@ -1,4 +1,4 @@
-export type LEVEL = "debug" | "info" | "warn" | "error" | "disable";
+export type LEVEL = "debug" | "info" | "warn" | "error" | "disable" | "success";
 
 export type SETTING = "bold" | "italic" | "dim" | "underscore" | "reverse" | "strikethrough";
 
@@ -68,6 +68,8 @@ declare class Logger {
     info(...args: any[]): void;
 
     debug(...args: any[]): void;
+
+    success(...args: any[]): void;
 }
 
 declare const logger: Logger;

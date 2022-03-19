@@ -9,3 +9,4 @@ logger.error('error show');
 logger.warn('warn show');
 logger.info('info show');
 logger.debug('debug will not show');
+logger.success('success show');
