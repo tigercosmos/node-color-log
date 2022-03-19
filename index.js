@@ -258,7 +258,7 @@ class Logger {
         } else {
             const d = this.getDate();
             this.log(d + " ").joint()
-                .bgColor('yellow').log('[WARN]').joint()
+                .bgColor('yellow').color('black').log('[WARN]').joint()
                 .log(" ").joint()
                 .color('yellow').log(...args);
         }
@@ -274,7 +274,7 @@ class Logger {
         } else {
             const d = this.getDate();
             this.log(d + " ").joint()
-                .bgColor('green').log('[INFO]').joint()
+                .bgColor('green').color('black').log('[INFO]').joint()
                 .log(" ").joint()
                 .color('green').log(...args);
         }
@@ -290,7 +290,7 @@ class Logger {
         } else {
             const d = this.getDate();
             this.log(d + " ").joint()
-                .bgColor('cyan').log("[DEBUG]").joint()
+                .bgColor('cyan').color('black').log("[DEBUG]").joint()
                 .log(' ').joint()
                 .color('cyan')
                 .log(...args);
@@ -307,7 +307,7 @@ class Logger {
         } else {
             const d = this.getDate();
             this.log(d + " ").joint()
-                .bgColor('green').log("[SUCCESS]").joint()
+                .bgColor('green').color('black').log("[SUCCESS]").joint()
                 .log(' ').joint()
                 .color('green')
                 .log(...args);
