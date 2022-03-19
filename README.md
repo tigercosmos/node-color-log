@@ -138,14 +138,16 @@ The output looks like:
 2018-08-14T18:23:09.838Z [WARN] This is warn mode
 ```
 
-### `setLevel()` & `LOGGER` environment variable & `success()`
+### `setLevel()` & `LOGGER` environment variable
 
 If you want to set mask for levels, simply add the line at the front. Levels below the setting level will all be hidden. There are four levels, which are `debug`, `info`, `warn`, `error`, or `disable` in lower-case.
 
 ```js
 logger.setLevel("info"); //  debug < info < warn < error < disable < success
 logger.debug("This `debug` will be hidden");
-logger.success("However, you can use `success` to break the level, so this line will be shown.");
+
+logger.setLevel("disable"); // hide every logs
+logger.success("However, you can use `success` to break the disable, so this line will be shown.");
 ```
 
 Or, you can set the environment variable `LOGGER`, such as `LOGGER=info npm start`, where it's equal to `setLevel("info")`.

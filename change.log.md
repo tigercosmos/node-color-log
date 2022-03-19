@@ -1,3 +1,6 @@
+8.0.1
+- revise README
+
 8.0.0
 - add success option
 - increase label contrast
