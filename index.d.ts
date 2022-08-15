@@ -1,16 +1,18 @@
-export type LEVEL = "debug" | "info" | "warn" | "error" | "disable" | "success";
+declare namespace types {
+    export type LEVEL = "debug" | "info" | "warn" | "error" | "disable" | "success";
 
-export type SETTING = "bold" | "italic" | "dim" | "underscore" | "reverse" | "strikethrough";
+    export type SETTING = "bold" | "italic" | "dim" | "underscore" | "reverse" | "strikethrough";
 
-export type COLOR = "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white";
+    export type COLOR = "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white";
+}
 
 type ticketObject = {
-    font?: COLOR,
-    bg?: COLOR,
+    font?: types.COLOR,
+    bg?: types.COLOR,
 }
 
 type settingObject = {
-    [key in SETTING]?: boolean;
+    [key in types.SETTING]?: boolean;
 };
 
 declare class Logger {
@@ -19,7 +21,7 @@ declare class Logger {
     level: any;
     noColor: boolean;
 
-    setLevel(level: LEVEL): void;
+    setLevel(level: types.LEVEL): void;
 
     createNamedLogger(name: string): Logger;
 
@@ -27,9 +29,9 @@ declare class Logger {
 
     setLevelColor(): void;
 
-    isLevelValid(level: LEVEL): boolean;
+    isLevelValid(level: types.LEVEL): boolean;
 
-    isAllowedLevel(level: LEVEL): boolean;
+    isAllowedLevel(level: types.LEVEL): boolean;
 
     checkSetting(setting: settingObject): string;
 
@@ -39,9 +41,9 @@ declare class Logger {
 
     getDate(): string;
     
-    color(ticket: COLOR): Logger;
+    color(ticket: types.COLOR): Logger;
     
-    bgColor(ticket: COLOR): Logger;
+    bgColor(ticket: types.COLOR): Logger;
     
     bold(): Logger;
     
@@ -55,9 +57,9 @@ declare class Logger {
     
     italic(): Logger;
     
-    fontColorLog(ticket: COLOR, text: string, setting?: settingObject): void;
+    fontColorLog(ticket: types.COLOR, text: string, setting?: settingObject): void;
     
-    bgColorLog(ticket: COLOR, text: string, setting?: settingObject): void;
+    bgColorLog(ticket: types.COLOR, text: string, setting?: settingObject): void;
     
     colorLog(ticketObj: ticketObject, text: string, setting?: settingObject): void;
 
