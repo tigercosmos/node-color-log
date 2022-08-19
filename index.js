@@ -36,11 +36,13 @@ const CONFIG = {
 const LEVELS = ["success", "debug", "info", "warn", "error", "disable"];
 
 class Logger {
-    constructor() {
+    constructor(name) {
         // Current command
         this.command = '';
         // Last line
         this.lastCommand = '';
+
+        this.name = name || ""
 
         // set level from env
         const level = process.env.LOGGER;
@@ -51,6 +53,10 @@ class Logger {
         this.noColor = false;
 
         this._getDate = () => (new Date()).toISOString();
+    }
+
+    createNamedLogger(name){
+        return new Logger(name)
     }
 
     setLevel(level) {
@@ -85,11 +91,7 @@ class Logger {
             if (typeof arg === "string") {
                 this.command += arg;
             } else {
-                try {
-                    this.command += JSON.stringify(arg);
-                } catch {
-                    this.command += arg;
-                }
+                this.command += JSON.stringify(arg);
             }
             if (args.length > 1 && idx < args.length - 1) {
                 this.command += " ";
@@ -130,8 +132,12 @@ class Logger {
         this._getDate = callback;
     }
 
-    getDate() {
-        return this._getDate();
+    getPrefix() {
+        if(this.name) {
+            return `${this._getDate()} [${this.name}]`;
+        } else {
+            return this._getDate();
+        }
     }
 
     color(ticket) {
@@ -241,10 +247,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d, " [ERROR] ", ...args);
         } else {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d + " ").joint()
                 .bgColor('red').log('[ERROR]').joint()
                 .log(" ").joint()
@@ -257,10 +263,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d, " [WARN] ", ...args);
         } else {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d + " ").joint()
                 .bgColor('yellow').color('black').log('[WARN]').joint()
                 .log(" ").joint()
@@ -273,10 +279,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d, " [INFO] ", ...args);
         } else {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d + " ").joint()
                 .bgColor('green').color('black').log('[INFO]').joint()
                 .log(" ").joint()
@@ -289,10 +295,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d, " [DEBUG] ", ...args);
         } else {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d + " ").joint()
                 .bgColor('cyan').color('black').log("[DEBUG]").joint()
                 .log(' ').joint()
@@ -306,10 +312,10 @@ class Logger {
             return;
 
         if (this.noColor) {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d, " [SUCCESS] ", ...args);
         } else {
-            const d = this.getDate();
+            const d = this.getPrefix();
             this.log(d + " ").joint()
                 .bgColor('green').color('black').log("[SUCCESS]").joint()
                 .log(' ').joint()
