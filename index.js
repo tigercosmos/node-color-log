@@ -85,7 +85,11 @@ class Logger {
             if (typeof arg === "string") {
                 this.command += arg;
             } else {
-                this.command += JSON.stringify(arg);
+                try {
+                    this.command += JSON.stringify(arg);
+                } catch {
+                    this.command += arg;
+                }
             }
             if (args.length > 1 && idx < args.length - 1) {
                 this.command += " ";
