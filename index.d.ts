@@ -21,6 +21,8 @@ declare class Logger {
 
     setLevel(level: LEVEL): void;
 
+    createNamedLogger(name: string): Logger;
+
     setLevelNoColor(): void;
 
     setLevelColor(): void;

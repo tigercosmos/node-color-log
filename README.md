@@ -178,6 +178,15 @@ logger.setDate(() => (new Date()).toLocaleTimeString())
 logger.info("This is an info message") // 5:17:59 pm [INFO] This is an info message
 ```
 
+### `createNamedLogger()`
+
+You can named a logger by `createNamedLogger()`
+
+```
+logger.createNamedLogger("Test 4");
+logger.error('error show'); // 2022-08-18T01:38:13.277Z [Test 4] [ERROR] error show  
+```
+
 ### Log Files
 
 If you want to save the logs to files, you can use shell pipes:

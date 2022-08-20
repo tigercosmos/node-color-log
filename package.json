@@ -1,10 +1,10 @@
 {
   "name": "node-color-log",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "description": "The more powerful JavaScript logger for NodeJS and browsers.",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js && LOGGER=info node test2.js"
+    "test": "node test.js && LOGGER=info node test2.js && node test3.js && LOGGER=info node test4.js"
   },
   "repository": {
     "type": "git",
