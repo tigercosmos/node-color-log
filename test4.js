@@ -1,6 +1,6 @@
 const logger = require('./index').createNamedLogger("Test 4");
 
-// $ LOGGER=info node test2.js
+// $ LOGGER=info node test4.js
 logger.log('****************************************');
 logger.log('*** Test Environment Variable LOGGER ***');
 logger.log('****************************************');

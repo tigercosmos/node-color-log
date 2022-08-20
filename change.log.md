@@ -1,3 +1,7 @@
+10.0.0
+- Adding error catching to json stringify
+- Adding support for named loggers: `createNamedLogger()`
+
 9.0.0
 - modify `success()`
 
