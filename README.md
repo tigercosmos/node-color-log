@@ -180,11 +180,13 @@ logger.info("This is an info message") // 5:17:59 pm [INFO] This is an info mess
 
 ### `createNamedLogger()`
 
-You can named a logger by `createNamedLogger()`
+You can create a named logger by calling `createNamedLogger()`
 
 ```
-logger.createNamedLogger("Test 4");
-logger.error('error show'); // 2022-08-18T01:38:13.277Z [Test 4] [ERROR] error show  
+logger1 = logger.createNamedLogger("Test 1");
+logger2 = logger.createNamedLogger("Test 2");
+logger1.info('something happened'); // 2022-08-20T04:56:17.834Z [Test 1] [INFO] something happened
+logger2.info('something happened'); // 2022-08-20T04:56:17.835Z [Test 2] [INFO] something happened 
 ```
 
 ### Log Files
