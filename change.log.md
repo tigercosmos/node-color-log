@@ -1,3 +1,6 @@
+10.0.2
+- fix typescript namespace issues
+
 10.0.1
 - update document for `createNamedLogger()`
 
