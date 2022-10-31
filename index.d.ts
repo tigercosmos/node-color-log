@@ -1,3 +1,5 @@
+import { PathLike } from "fs";
+
 declare namespace types {
     export type LEVEL = "debug" | "info" | "warn" | "error" | "disable" | "success";
 
@@ -22,6 +24,8 @@ declare class Logger {
     noColor: boolean;
 
     setLevel(level: types.LEVEL): void;
+
+    setLogFile(logFilePath: PathLike): void;
 
     createNamedLogger(name: string): Logger;
 

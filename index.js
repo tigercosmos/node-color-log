@@ -1,3 +1,8 @@
+const { createWriteStream } = require("fs");
+const { EOL } = require("os");
+const { resolve } = require("path");
+const stripAnsi = require("strip-ansi");
+
 const CONFIG = {
     SYSTEM: {
         reset: "\x1b[0m",
@@ -43,6 +48,8 @@ class Logger {
         this.lastCommand = '';
 
         this.name = name || ""
+
+        this.logFileStream = null
 
         // set level from env
         const level = process.env.LOGGER;
@@ -106,10 +113,24 @@ class Logger {
             this.command += CONFIG.SYSTEM.reset;
         }
         console.log(this.command);
+        this.saveLogToFile()
         // Save last command if we need to use for joint
         this.lastCommand = this.command;
         this.command = '';
         return this;
+    }
+
+    setLogFile(logFilePath) {
+        // Create a stream to save log messages
+        // TODO Сheck errors?
+        this.logFileStream = createWriteStream(resolve(logFilePath), { flags: 'a' });
+    }
+
+    saveLogToFile() {
+        // Write messages to the stream, if it exists
+        // TODO Сheck errors?
+        // TODO Eliminating "joint()" repetitions
+        if (this.logFileStream) this.logFileStream.write(stripAnsi(this.command) + EOL);
     }
 
     joint() {
