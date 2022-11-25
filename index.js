@@ -85,6 +85,23 @@ class Logger {
     }
 
     log(...args) {
+        var output_stream = 'log'
+
+        // Store and set the stack trace limit
+        const defaultStackTraceLimit = Error.stackTraceLimit
+        Error.stackTraceLimit=2
+
+        // Capture the caller
+        const caller = (new Error()).stack.toString().match(/at \w+\.\w+/gm)[1]
+
+        // If we got called from this class, then send the output to stderr
+        const re = new RegExp(`${this.constructor.name}.`)
+        if ( caller && caller.match(re) ) {
+          output_stream = 'error'
+        }
+
+        // Reset the stack trace limit
+        Error.stackTraceLimit=defaultStackTraceLimit
 
         for (const idx in args) {
             const arg = args[idx];
@@ -105,7 +122,7 @@ class Logger {
         if (!this.noColor) {
             this.command += CONFIG.SYSTEM.reset;
         }
-        console.log(this.command);
+        console[output_stream](this.command);
         // Save last command if we need to use for joint
         this.lastCommand = this.command;
         this.command = '';
