@@ -61,9 +61,8 @@ class Logger {
 
         this._getDate = () => (new Date()).toISOString();
 
-        process.once('exit', () => {
-            this.saveLogToFile(this.lastCommand)
-        })
+        // Write last message before exit
+        process.once('exit', () => this.saveLogToFile())
     }
 
     createNamedLogger(name){
@@ -117,8 +116,9 @@ class Logger {
         }
         console.log(this.command);
 
+        // Writing the previous command to a file if the current command is not a continuation of the previous command
         if (!stripAnsi(this.command).startsWith(stripAnsi(this.lastCommand))) {
-          this.saveLogToFile(this.lastCommand)
+            this.saveLogToFile()
         }
         // Save last command if we need to use for joint
         this.lastCommand = this.command;
@@ -131,9 +131,9 @@ class Logger {
         this.logFileStream = createWriteStream(resolve(logFilePath), { flags: 'a' });
     }
 
-    saveLogToFile(text) {
+    saveLogToFile() {
         // Write messages to the stream, if it exists
-        if (this.logFileStream) this.logFileStream.write(stripAnsi(text) + EOL);
+        if (this.logFileStream) this.logFileStream.write(stripAnsi(this.lastCommand) + EOL);
     }
 
     joint() {
