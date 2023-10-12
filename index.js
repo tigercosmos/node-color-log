@@ -60,6 +60,10 @@ class Logger {
         this.noColor = false;
 
         this._getDate = () => (new Date()).toISOString();
+
+        process.once('exit', () => {
+            this.saveLogToFile(this.lastCommand)
+        })
     }
 
     createNamedLogger(name){
@@ -92,7 +96,6 @@ class Logger {
     }
 
     log(...args) {
-
         for (const idx in args) {
             const arg = args[idx];
             if (typeof arg === "string") {
@@ -113,7 +116,10 @@ class Logger {
             this.command += CONFIG.SYSTEM.reset;
         }
         console.log(this.command);
-        this.saveLogToFile()
+
+        if (!stripAnsi(this.command).startsWith(stripAnsi(this.lastCommand))) {
+          this.saveLogToFile(this.lastCommand)
+        }
         // Save last command if we need to use for joint
         this.lastCommand = this.command;
         this.command = '';
@@ -122,15 +128,12 @@ class Logger {
 
     setLogFile(logFilePath) {
         // Create a stream to save log messages
-        // TODO Сheck errors?
         this.logFileStream = createWriteStream(resolve(logFilePath), { flags: 'a' });
     }
 
-    saveLogToFile() {
+    saveLogToFile(text) {
         // Write messages to the stream, if it exists
-        // TODO Сheck errors?
-        // TODO Eliminating "joint()" repetitions
-        if (this.logFileStream) this.logFileStream.write(stripAnsi(this.command) + EOL);
+        if (this.logFileStream) this.logFileStream.write(stripAnsi(text) + EOL);
     }
 
     joint() {
