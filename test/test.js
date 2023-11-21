@@ -1,4 +1,4 @@
-const logger = require('./index');
+const logger = require('../index');
 
 logger.log('****************');
 logger.log('*** Test log ***');
@@ -12,9 +12,15 @@ logger.color('red').bold().log('Red and Bold.');
 logger.color('blue').bgColor('yellow').bold().italic().log('blue, yellow, bold, italic, ');
 logger.log('this should be normal.')
 logger.bold().italic().color('blue').bgColor('yellow').log('bold, italic, blue, yellow.');
-logger.color('yellow').log('font in yellow').joint().bgColor('red').log('background in red');
-logger.color('yellow').log('font in yellow').joint()
-      .bgColor('red').log('background in red').joint()
+// deprecated joint
+logger.color('yellow').log('font in yellow,').joint().bgColor('red').log('background in red,');
+logger.color('yellow').log('font in yellow,').joint()
+      .bgColor('red').log('background in red,').joint()
+      .color('yellow').log('font in yellow');
+// test append
+logger.color('yellow').append('font in yellow,').bgColor('red').log('background in red');
+logger.color('yellow').append('font in yellow,')
+      .bgColor('red').append('background in red,').reset()
       .color('yellow').log('font in yellow');
 logger.log('\n');
 

@@ -1,4 +1,4 @@
-const logger = require('./index').createNamedLogger("Test 4");
+const logger = require('../index').createNamedLogger("Test 4");
 
 // $ LOGGER=info node test4.js
 logger.log('****************************************');

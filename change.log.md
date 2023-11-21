@@ -1,3 +1,6 @@
+11.0.0
+- add `append()` and deprecate `joint`, add `reset`, add `setLogStream` to redirect logs to the stream
+
 10.0.2
 - fix typescript namespace issues
 

@@ -25,6 +25,8 @@ declare class Logger {
 
     createNamedLogger(name: string): Logger;
 
+    setLogStream(stream: Stream): Logger;
+
     setLevelNoColor(): void;
 
     setLevelColor(): void;
@@ -36,6 +38,10 @@ declare class Logger {
     checkSetting(setting: settingObject): string;
 
     joint(): Logger;
+
+    append(...args: any[]): Logger;
+
+    reset(): Logger;
 
     setDate(callback: Function): void;
 

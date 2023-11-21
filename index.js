@@ -53,9 +53,11 @@ class Logger {
         this.noColor = false;
 
         this._getDate = () => (new Date()).toISOString();
+
+        this._customizedConsole = console;
     }
 
-    createNamedLogger(name){
+    createNamedLogger(name) {
         return new Logger(name)
     }
 
@@ -66,6 +68,14 @@ class Logger {
             throw "Level you are trying to set is invalid";
         }
 
+    }
+
+    setLogStream(newStream) {
+        if (newStream.writable) {
+            this._customizedConsole = new console.Console(newStream);
+        } else {
+            throw "invalid writable stream object";
+        }
     }
 
     setLevelNoColor() {
@@ -85,36 +95,23 @@ class Logger {
     }
 
     log(...args) {
-
-        for (const idx in args) {
-            const arg = args[idx];
-            if (typeof arg === "string") {
-                this.command += arg;
-            } else {
-                try {
-                    this.command += JSON.stringify(arg);
-                } catch {
-                    this.command += arg;
-                }
-            }
-            if (args.length > 1 && idx < args.length - 1) {
-                this.command += " ";
-            }
-        }
-
+        this.append(...args);
         if (!this.noColor) {
             this.command += CONFIG.SYSTEM.reset;
         }
-        console.log(this.command);
+        this._print(this.command);
         // Save last command if we need to use for joint
         this.lastCommand = this.command;
         this.command = '';
         return this;
     }
 
+    // deprecated
     joint() {
+        console.error("node-color-log warning: `joint` is deprecated, please use `append`");
+
         // Clear the last line
-        console.log(CONFIG.SYSTEM.backoneline + CONFIG.SYSTEM.cleanthisline);
+        this._print(CONFIG.SYSTEM.backoneline + CONFIG.SYSTEM.cleanthisline);
 
         // Reset the command to let it joint the next
         // And print from the position of last line
@@ -137,7 +134,7 @@ class Logger {
     }
 
     getPrefix() {
-        if(this.name) {
+        if (this.name) {
             return `${this._getDate()} [${this.name}]`;
         } else {
             return this._getDate();
@@ -148,7 +145,7 @@ class Logger {
         if (ticket in CONFIG.FONT) {
             this.command += CONFIG.FONT[ticket];
         } else {
-            this.warn("node-color-log: Font color not found! Use the default.")
+            console.error("node-color-log warning: Font color not found! Use the default.")
         }
         return this;
     }
@@ -157,7 +154,7 @@ class Logger {
         if (ticket in CONFIG.BACKGROUND) {
             this.command += CONFIG.BACKGROUND[ticket];
         } else {
-            this.warn("node-color-log: Background color not found! Use the default.")
+            console.error("node-color-log warning: Background color not found! Use the default.")
         }
         return this;
     }
@@ -200,12 +197,12 @@ class Logger {
         if (ticket in CONFIG.FONT) {
             command += CONFIG.FONT[ticket];
         } else {
-            this.warn("node-color-log: Font color not found! Use the default.")
+            console.error("node-color-log warning: Font color not found! Use the default.")
         }
         command += text;
 
         command += CONFIG.SYSTEM.reset;
-        console.log(command);
+        this._print(command);
     }
 
     bgColorLog(ticket, text, setting) {
@@ -216,12 +213,12 @@ class Logger {
         if (ticket in CONFIG.BACKGROUND) {
             command += CONFIG.BACKGROUND[ticket];
         } else {
-            this.warn("node-color-log: Background color not found! Use the default.")
+            console.error("node-color-log warning: Background color not found! Use the default.")
         }
         command += text;
 
         command += CONFIG.SYSTEM.reset;
-        console.log(command);
+        this._print(command);
     }
 
     colorLog(ticketObj, text, setting) {
@@ -232,18 +229,18 @@ class Logger {
         if (ticketObj.font in CONFIG.FONT) {
             command += CONFIG.FONT[ticketObj.font];
         } else {
-            this.warn("node-color-log: Font color not found! Use the default.")
+            console.error("node-color-log warning: Font color not found! Use the default.")
         }
         if (ticketObj.bg in CONFIG.BACKGROUND) {
             command += CONFIG.BACKGROUND[ticketObj.bg]
         } else {
-            this.warn("node-color-log: Background color not found! Use the default.")
+            console.error("node-color-log warning: Background color not found! Use the default.")
         }
 
         command += text;
 
         command += CONFIG.SYSTEM.reset;
-        console.log(command);
+        this._print(command);
     }
 
     error(...args) {
@@ -255,9 +252,9 @@ class Logger {
             this.log(d, " [ERROR] ", ...args);
         } else {
             const d = this.getPrefix();
-            this.log(d + " ").joint()
-                .bgColor('red').log('[ERROR]').joint()
-                .log(" ").joint()
+            this.append(d + " ")
+                .bgColor('red').append('[ERROR]').reset()
+                .append(" ")
                 .color('red').log(...args);
         }
     }
@@ -271,9 +268,9 @@ class Logger {
             this.log(d, " [WARN] ", ...args);
         } else {
             const d = this.getPrefix();
-            this.log(d + " ").joint()
-                .bgColor('yellow').color('black').log('[WARN]').joint()
-                .log(" ").joint()
+            this.append(d + " ")
+                .bgColor('yellow').color('black').append('[WARN]').reset()
+                .append(" ")
                 .color('yellow').log(...args);
         }
     }
@@ -287,9 +284,9 @@ class Logger {
             this.log(d, " [INFO] ", ...args);
         } else {
             const d = this.getPrefix();
-            this.log(d + " ").joint()
-                .bgColor('green').color('black').log('[INFO]').joint()
-                .log(" ").joint()
+            this.append(d + " ")
+                .bgColor('green').color('black').append('[INFO]').reset()
+                .append(" ")
                 .color('green').log(...args);
         }
     }
@@ -303,9 +300,9 @@ class Logger {
             this.log(d, " [DEBUG] ", ...args);
         } else {
             const d = this.getPrefix();
-            this.log(d + " ").joint()
-                .bgColor('cyan').color('black').log("[DEBUG]").joint()
-                .log(' ').joint()
+            this.append(d + " ")
+                .bgColor('cyan').color('black').append("[DEBUG]").reset()
+                .append(' ')
                 .color('cyan')
                 .log(...args);
         }
@@ -320,9 +317,9 @@ class Logger {
             this.log(d, " [SUCCESS] ", ...args);
         } else {
             const d = this.getPrefix();
-            this.log(d + " ").joint()
-                .bgColor('green').color('black').log("[SUCCESS]").joint()
-                .log(' ').joint()
+            this.append(d + " ")
+                .bgColor('green').color('black').append("[SUCCESS]").reset()
+                .append(' ')
                 .color('green')
                 .log(...args);
         }
@@ -336,15 +333,44 @@ class Logger {
                 if (setting[item] === true) {
                     command += CONFIG.SYSTEM[item];
                 } else if (setting[item] !== false) {
-                    this.warn(`node-color-log: The value ${item} should be boolean.`)
+                    console.error(`node-color-log warning: The value ${item} should be boolean.`)
                 }
             } else {
-                this.warn(`node-color-log: ${item} is not valid in setting.`)
+                console.error(`node-color-log warning: ${item} is not valid in setting.`)
             }
         }
         return command;
     }
 
+    // helper function to output the the log to stream
+    _print(...args) {
+        this._customizedConsole.log(...args);
+    }
+
+    // helper function to append the command buffer
+    append(...args) {
+        for (const idx in args) {
+            const arg = args[idx];
+            if (typeof arg === "string") {
+                this.command += arg;
+            } else {
+                try {
+                    this.command += JSON.stringify(arg);
+                } catch {
+                    this.command += arg;
+                }
+            }
+            if (args.length > 1 && idx < args.length - 1) {
+                this.command += " ";
+            }
+        }
+        return this;
+    }
+
+    reset() {
+        this.command += CONFIG.SYSTEM.reset;
+        return this;
+    }
 }
 
 const logger = new Logger();

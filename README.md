@@ -50,9 +50,11 @@ log with attributes, the order of setters can change.
 
 **NOTE:** `log()` need to put behind of attribute setter(at the end).
 
-`joint()` can connect different style of message in a line.
+`append()` can appends the contents in one line. (Note: old `joint` is now deprecated.)
 
 `color()` and `bgColor()` includes: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
+
+`reset()` can clear the previous attributes in the same line.
 
 Usage:
 
@@ -63,14 +65,37 @@ logger.log(message)
 logger.color('red').bgColor('blue')
       .bold().italic().dim().reverse().underscore().strikethrough()
       .log(message);
-// Joint log
-logger.color('red').bold().log(message_style_1).joint()
-      .bgColor('white').italic().log(message_style_2).joint()
-      .strikethrough().log(message_style_3);
+// use `append`` to joint contents, and use `log` to print out at the end
+logger.color('red').bold().append('message_style_1')
+      .bgColor('white').italic().append('message_style_2')
+      .strikethrough().log('message_style_3');
+
+// use `reset` to clean the attributes
+logger.bgColor('red').append('background red color message')
+      .reset() // by calling this, background is reset
+      .log('default background color message');
 
 // log multiple arguments
 logger.log(obj1, arr2, str3);
 ```
+
+### `setLogStream`
+
+You can redirect the logs to the stream.
+
+for example, you can write the log into the file:
+
+```js
+fileStream = fs.createWriteStream('test.log'),
+logger.setLogStream(fileStream)
+
+logger.log("hi");
+logger.error("hello", "world");
+
+fileStream.close()
+```
+
+you can use `less -R test.log` to see the result.
 
 ### `fontColorLog()`, `bgColorLog()`, `colorLog()`
 
@@ -188,18 +213,6 @@ logger2 = logger.createNamedLogger("Test 2");
 logger1.info('something happened'); // 2022-08-20T04:56:17.834Z [Test 1] [INFO] something happened
 logger2.info('something happened'); // 2022-08-20T04:56:17.835Z [Test 2] [INFO] something happened 
 ```
-
-### Log Files
-
-If you want to save the logs to files, you can use shell pipes:
-
-For example, it saves logs belonged and above `warn` to `log.txt`:
-
-```shell
-$ LOGGER=warn node index.js > log.txt
-```
-
-To see more example, you can check `./test.js` or run `npm test` to see the result.
 
 ### Contribute
 
