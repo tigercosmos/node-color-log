@@ -1,3 +1,4 @@
+import { Stream } from "stream";
 declare namespace types {
     export type LEVEL = "debug" | "info" | "warn" | "error" | "disable" | "success";
 
