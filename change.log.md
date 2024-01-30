@@ -1,3 +1,6 @@
+11.0.1
+- fixed `Stream` typescript
+
 11.0.0
 - add `append()` and deprecate `joint`, add `reset`, add `setLogStream` to redirect logs to the stream
 
