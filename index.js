@@ -45,7 +45,7 @@ class Logger {
         this.name = name || ""
 
         // set level from env
-        const level = process.env.LOGGER;
+        const level = typeof process !== 'undefined' ? process.env.LOGGER : undefined;
         if (this.isLevelValid(level)) {
             this.level = level;
         }
