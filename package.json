@@ -4,7 +4,7 @@
   "description": "The more powerful JavaScript logger for NodeJS and browsers.",
   "main": "index.js",
   "scripts": {
-    "test": "./test/test_main.sh",
+    "test": "bash ./test/test_main.sh",
     "test-windows": "powershell -File test/test_main.ps1"
   },
   "repository": {
