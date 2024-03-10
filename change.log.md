@@ -1,3 +1,6 @@
+12.0.0
+- default output to stderr. enhanced CI.
+
 11.0.2
 - check `process.env` exists
 
