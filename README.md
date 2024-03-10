@@ -1,6 +1,6 @@
 ![Banner](https://raw.githubusercontent.com/tigercosmos/node-color-log/master/assets/banner.png)
 
-[![Build Status](https://travis-ci.org/tigercosmos/node-color-log.svg?branch=master)](https://travis-ci.org/tigercosmos/node-color-log)
+[![Test](https://github.com/tigercosmos/node-color-log/actions/workflows/test.yml/badge.svg)](https://github.com/tigercosmos/node-color-log/actions/workflows/test.yml)
 [![npm version](https://badge.fury.io/js/node-color-log.svg)](https://badge.fury.io/js/node-color-log)
 [![npm downloads](https://badgen.now.sh/npm/dm/node-color-log)](https://www.npmjs.com/package/node-color-log)
 
