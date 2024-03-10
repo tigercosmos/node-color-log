@@ -344,7 +344,7 @@ class Logger {
 
     // helper function to output the the log to stream
     _print(...args) {
-        this._customizedConsole.log(...args);
+        this._customizedConsole.error(...args);
     }
 
     // helper function to append the command buffer
