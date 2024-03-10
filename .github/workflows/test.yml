@@ -6,12 +6,50 @@ on:
       - master
 
 jobs:
-  test:
+  test-ubuntu:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16, 18, 20]
+        node-version: [20, 21]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Run tests
+      run: npm test
+
+  test-macos:
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        node-version: [20, 21]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Run tests
+      run: npm test
+
+  test-windows:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [20, 21]
 
     steps:
     - name: Checkout repository
