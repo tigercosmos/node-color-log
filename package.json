@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/tigercosmos/node-color-log/issues"
   },
-  "homepage": "https://github.com/tigercosmos/node-color-log"
+  "homepage": "https://github.com/tigercosmos/node-color-log",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
