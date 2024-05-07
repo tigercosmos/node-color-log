@@ -104,3 +104,96 @@ describe('append', () => {
         expect(logger.lastCommand).toBe('\x1b[33mfont in yellow,\x1b[41mbackground in red,\x1b[0m\x1b[33mfont in yellow\x1b[0m');
     })
 })
+
+describe('fontColorLog', () => {
+    test('Font in red.', () => {
+        logger.fontColorLog('red', 'Font in red.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[31mFont in red.\x1b[0m');
+    })
+
+    test('Font in black.', () => {
+        logger.fontColorLog('black', 'Font in black.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[30mFont in black.\x1b[0m');
+    })
+
+    test('Font in green.', () => {
+        logger.fontColorLog('green', 'Font in green.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[32mFont in green.\x1b[0m');
+    })
+
+    test('Font in yellow.', () => {
+        logger.fontColorLog('yellow', 'Font in yellow.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[33mFont in yellow.\x1b[0m');
+    })
+
+    test('Font in blue.', () => {
+        logger.fontColorLog('blue', 'Font in blue.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[34mFont in blue.\x1b[0m');
+    })
+
+    test('Font in magenta.', () => {
+        logger.fontColorLog('magenta', 'Font in magenta.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[35mFont in magenta.\x1b[0m');
+    })
+
+    test('Font in cyan.', () => {
+        logger.fontColorLog('cyan', 'Font in cyan.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[36mFont in cyan.\x1b[0m');
+    })
+
+    test('Font in white.', () => {
+        logger.fontColorLog('white', 'Font in white.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[37mFont in white.\x1b[0m');
+    })
+
+    test('Bold, blue, italic', () => {
+        logger.fontColorLog('blue', 'Bold, blue, italic', {
+            bold: true,
+            underscore: false,
+            italic: true
+        });
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[1m\x1b[3m\x1b[34mBold, blue, italic\x1b[0m');
+    })
+
+    test('Bold, dim, underscore, reverse', () => {
+        logger.fontColorLog('blue', 'Bold, dim, underscore, reverse', {
+            bold: true,
+            dim: true,
+            underscore: true,
+            reverse: true,
+        });
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[1m\x1b[2m\x1b[4m\x1b[7m\x1b[34mBold, dim, underscore, reverse\x1b[0m');
+    })
+
+    test('Bold, underscore, blue.', () => {
+        logger.fontColorLog('blue', 'Bold, underscore, blue.', {
+            bold: true,
+            dim: false,
+            underscore: true,
+            reverse: false,
+        });
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[1m\x1b[4m\x1b[34mBold, underscore, blue.\x1b[0m');
+    })
+})
