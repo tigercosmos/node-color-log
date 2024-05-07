@@ -197,3 +197,95 @@ describe('fontColorLog', () => {
         expect(logger.lastCommand).toBe('\x1b[1m\x1b[4m\x1b[34mBold, underscore, blue.\x1b[0m');
     })
 })
+
+describe('bgColorLog', () => {
+    test('Background in red.', () => {
+        logger.bgColorLog('red', 'Background in red.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[41mBackground in red.\x1b[0m');
+    })
+
+    test('Background in black.', () => {
+        logger.bgColorLog('black', 'Background in black.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[40mBackground in black.\x1b[0m');
+    })
+
+    test('Background in green.', () => {
+        logger.bgColorLog('green', 'Background in green.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[42mBackground in green.\x1b[0m');
+    })
+
+    test('Background in yellow.', () => {
+        logger.bgColorLog('yellow', 'Background in yellow.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[43mBackground in yellow.\x1b[0m');
+    })
+
+    test('Background in blue.', () => {
+        logger.bgColorLog('blue', 'Background in blue.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[44mBackground in blue.\x1b[0m');
+    })
+
+    test('Background in magenta.', () => {
+        logger.bgColorLog('magenta', 'Background in magenta.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[45mBackground in magenta.\x1b[0m');
+    })
+
+    test('Background in cyan.', () => {
+        logger.bgColorLog('cyan', 'Background in cyan.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[46mBackground in cyan.\x1b[0m');
+    })
+
+    test('Background in white.', () => {
+        logger.bgColorLog('white', 'Background in white.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[47mBackground in white.\x1b[0m');
+    })
+
+    test('Bold, blue', () => {
+        logger.bgColorLog('blue', 'Bold, blue', {
+            bold: true,
+            underscore: false,
+        });
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[1m\x1b[44mBold, blue\x1b[0m');
+    })
+
+    test('Bold, dim, underscore, reverse', () => {
+        logger.bgColorLog('blue', 'Bold, dim, underscore, reverse', {
+            bold: true,
+            dim: true,
+            underscore: true,
+            reverse: true,
+        });
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[1m\x1b[2m\x1b[4m\x1b[7m\x1b[44mBold, dim, underscore, reverse\x1b[0m');
+    })
+
+    test('Bold, underscore, blue.', () => {
+        logger.bgColorLog('blue', 'Bold, underscore, blue.', {
+            bold: true,
+            dim: false,
+            underscore: true,
+            reverse: false,
+        });
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[1m\x1b[4m\x1b[44mBold, underscore, blue.\x1b[0m');
+    })
+})
