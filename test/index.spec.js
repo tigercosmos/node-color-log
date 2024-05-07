@@ -289,3 +289,65 @@ describe('bgColorLog', () => {
         expect(logger.lastCommand).toBe('\x1b[1m\x1b[4m\x1b[44mBold, underscore, blue.\x1b[0m');
     })
 })
+
+describe('colorLog', () => {
+    test('Red font in black background.', () => {
+        logger.colorLog({
+            font: 'red',
+            bg: 'black'
+        }, 'Red font in black background.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[31m\x1b[40mRed font in black background.\x1b[0m');
+    })
+
+    test('blue font in yellow background.', () => {
+        logger.colorLog({
+            font: 'blue',
+            bg: 'yellow'
+        }, 'blue font in yellow background.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[34m\x1b[43mblue font in yellow background.\x1b[0m');
+    })
+
+    test('blue font in yellow background.', () => {
+        logger.colorLog({
+            font: 'red',
+            bg: 'green'
+        }, 'Red font in green background.');
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[31m\x1b[42mRed font in green background.\x1b[0m');
+    })
+
+    test('blue font in yellow background.', () => {
+        logger.colorLog({
+            font: 'red',
+            bg: 'green'
+        }, 'Red font in green background, underscore, strikethrough.', {
+            underscore: true,
+            reverse: false,
+            strikethrough: true
+        });
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[4m\x1b[9m\x1b[31m\x1b[42mRed font in green background, underscore, strikethrough.\x1b[0m');
+    })
+
+    test('Red font in green background, bold, underscore, reverse, strikethrough.', () => {
+        logger.colorLog({
+            font: 'red',
+            bg: 'green'
+        }, 'Red font in green background, bold, underscore, reverse, strikethrough.', {
+            bold: true,
+            dim: false,
+            underscore: true,
+            reverse: true,
+            strikethrough: true
+        });
+        console.clear()
+        
+        expect(logger.lastCommand).toBe('\x1b[1m\x1b[4m\x1b[7m\x1b[9m\x1b[31m\x1b[42mRed font in green background, bold, underscore, reverse, strikethrough.\x1b[0m');
+    })
+})
