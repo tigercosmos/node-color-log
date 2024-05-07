@@ -202,6 +202,7 @@ class Logger {
         command += text;
 
         command += CONFIG.SYSTEM.reset;
+        this.lastCommand = command;
         this._print(command);
     }
 
@@ -218,6 +219,7 @@ class Logger {
         command += text;
 
         command += CONFIG.SYSTEM.reset;
+        this.lastCommand = command;
         this._print(command);
     }
 
@@ -240,6 +242,7 @@ class Logger {
         command += text;
 
         command += CONFIG.SYSTEM.reset;
+        this.lastCommand = command;
         this._print(command);
     }
 
