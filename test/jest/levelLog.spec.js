@@ -110,6 +110,8 @@ describe('set level', () => {
         logger.debug('debug show');
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('debug', 'debug show'));
+        
+        logger.level = undefined
     })
 
     test('set level to info', () => {
@@ -130,6 +132,8 @@ describe('set level', () => {
         logger.debug('debug will not show');
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('info', 'info show'));
+
+        logger.level = undefined
     })
 
     test('set level to warn', () => {
@@ -147,6 +151,8 @@ describe('set level', () => {
         logger.debug('debug will not show');
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('warn', 'warn show'));
+
+        logger.level = undefined
     })
 
     test('set level to error', () => {
@@ -161,6 +167,8 @@ describe('set level', () => {
         logger.debug('debug will not show');
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('error', 'error show'));
+
+        logger.level = undefined
     })
 })
 
@@ -168,7 +176,6 @@ describe('level no color', () => {
     test('set level no color', () => {
         expect.assertions(9);
 
-        logger.setLevel("debug");
         logger.setLevelNoColor();
         expect(logger.noColor).toBe(true);
 
@@ -187,5 +194,7 @@ describe('level no color', () => {
         logger.debug('debug show');
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(' [DEBUG]  debug show');
+
+        logger.noColor = false
     })
 })
