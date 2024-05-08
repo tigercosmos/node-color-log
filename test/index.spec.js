@@ -373,3 +373,106 @@ describe('Level Log', () => {
         expect(logMessage).toBe('\x1b[43m\x1b[30m[WARN]\x1b[0m \x1b[33mThis is warn mode\x1b[0m');
     })
 })
+
+afterEach(() => {
+  // restore the spy created with spyOn
+  jest.restoreAllMocks();
+});
+
+describe('Wrong Usage', () => {
+    test('Pass wrong font color string to fontColorLog()', () => {
+        expect.assertions(2);
+        jest.spyOn(console, 'error');
+
+        logger.fontColorLog('test', 'Should be no color.');
+
+        expect(console.error).toHaveBeenCalledWith('node-color-log warning: Font color not found! Use the default.');
+        expect(logger.lastCommand).toBe('Should be no color.\x1b[0m');
+    })
+
+    test('Pass wrong background color string to bgColorLog()', () => {
+        expect.assertions(2);
+        jest.spyOn(console, 'error');
+
+        logger.bgColorLog('test', 'Should be no color.');
+
+        expect(console.error).toHaveBeenCalledWith('node-color-log warning: Background color not found! Use the default.');
+        expect(logger.lastCommand).toBe('Should be no color.\x1b[0m');
+    })
+
+    test('Pass wrong font color string to colorLog()', () => {
+        expect.assertions(2);
+        jest.spyOn(console, 'error');
+
+        logger.colorLog({
+            font: 'test',
+            bg: 'blue'
+        }, 'Font color warning.');
+
+        expect(console.error).toHaveBeenCalledWith('node-color-log warning: Font color not found! Use the default.');
+        expect(logger.lastCommand).toBe('\x1b[44mFont color warning.\x1b[0m');
+    })
+
+    test('Pass wrong background color string to colorLog()', () => {
+        expect.assertions(2);
+        jest.spyOn(console, 'error');
+
+        logger.colorLog({
+            font: 'red',
+            bg: 'test'
+        }, 'Background color warning.');
+
+        expect(console.error).toHaveBeenCalledWith('node-color-log warning: Background color not found! Use the default.');
+        expect(logger.lastCommand).toBe('\x1b[31mBackground color warning.\x1b[0m');
+    })
+
+    test('Pass wrong font color string and background color string to colorLog()', () => {
+        expect.assertions(3);
+        jest.spyOn(console, 'error');
+
+        logger.colorLog({
+            font: 'test',
+            bg: 'test'
+        }, 'Font and background color warning.');
+
+        expect(console.error).toHaveBeenCalledWith('node-color-log warning: Font color not found! Use the default.');
+        expect(console.error).toHaveBeenCalledWith('node-color-log warning: Background color not found! Use the default.');
+        expect(logger.lastCommand).toBe('Font and background color warning.\x1b[0m');
+    })
+
+    test('Pass wrong setting to fontColorLog()', () => {
+        expect.assertions(2);
+        jest.spyOn(console, 'error');
+
+        logger.fontColorLog('red', 'Wrong setting.', {
+            width: true,
+        });
+
+        expect(console.error).toHaveBeenCalledWith(`node-color-log warning: width is not valid in setting.`);
+        expect(logger.lastCommand).toBe('\x1b[31mWrong setting.\x1b[0m');
+    })
+
+    test('Pass wrong setting to bgColorLog()', () => {
+        expect.assertions(2);
+        jest.spyOn(console, 'error');
+
+        logger.bgColorLog('red', 'Wrong setting.', {
+            dim: 'true',
+        });
+
+        expect(console.error).toHaveBeenCalledWith('node-color-log warning: The value dim should be boolean.');
+        expect(logger.lastCommand).toBe('\x1b[41mWrong setting.\x1b[0m');
+    })
+
+    test('Pass wrong setting to bgColorLog()', () => {
+        expect.assertions(2);
+        jest.spyOn(console, 'error');
+
+        logger.bgColorLog('red', 'Wrong setting.', {
+            bold: 4
+        });
+
+        expect(console.error).toHaveBeenCalledWith('node-color-log warning: The value bold should be boolean.');
+        expect(logger.lastCommand).toBe('\x1b[41mWrong setting.\x1b[0m');
+    })
+})
