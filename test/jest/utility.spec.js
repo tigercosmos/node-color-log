@@ -1,98 +1,6 @@
-const logger = require('../index');
+const logger = require('../../index');
 
-describe('log chain', () => {
-    test('blue and underscore.', () => {
-        logger.color('blue').underscore().log('blue and underscore.');
-        
-        expect(logger.lastCommand).toBe('\x1b[34m\x1b[4mblue and underscore.\x1b[0m');
-    });
-
-    test('blue and reverse.', () => {
-        logger.color('blue').reverse().log('blue and reverse.');
-        
-        expect(logger.lastCommand).toBe('\x1b[34m\x1b[7mblue and reverse.\x1b[0m');
-    });
-
-    test('blue and dim.', () => {
-        logger.color('blue').dim().log('blue and dim.');
-        
-        expect(logger.lastCommand).toBe('\x1b[34m\x1b[2mblue and dim.\x1b[0m');
-    });
-
-    test('blue and italic.', () => {
-        logger.color('blue').italic().log('blue and italic.');
-        
-        expect(logger.lastCommand).toBe('\x1b[34m\x1b[3mblue and italic.\x1b[0m');
-    });
-
-    test('blue and strikethrough.', () => {
-        logger.color('blue').strikethrough().log('blue and strikethrough.');
-        
-        expect(logger.lastCommand).toBe('\x1b[34m\x1b[9mblue and strikethrough.\x1b[0m');
-    });
-
-    test('Red and Bold.', () => {
-        logger.color('red').bold().log('Red and Bold.');
-        
-        expect(logger.lastCommand).toBe('\x1b[31m\x1b[1mRed and Bold.\x1b[0m');
-    });
-
-    test('blue, yellow, bold, italic.', () => {
-        logger.color('blue').bgColor('yellow').bold().italic().log('blue, yellow, bold, italic.');
-        
-        expect(logger.lastCommand).toBe('\x1b[34m\x1b[43m\x1b[1m\x1b[3mblue, yellow, bold, italic.\x1b[0m');
-    });
-
-    test('this should be normal.', () => {
-        logger.log('this should be normal.')
-        
-        expect(logger.lastCommand).toBe('this should be normal.\x1b[0m');
-    });
-
-    test('bold, italic, blue, yellow.', () => {
-        logger.bold().italic().color('blue').bgColor('yellow').log('bold, italic, blue, yellow.');
-        
-        expect(logger.lastCommand).toBe('\x1b[1m\x1b[3m\x1b[34m\x1b[43mbold, italic, blue, yellow.\x1b[0m');
-    });
-});
-
-// deprecated joint
-describe('joint', () => {
-    test('1 joint', () => {
-        logger
-            .color('yellow').log('font in yellow,')
-            .joint().bgColor('red').log('background in red,');
-        
-        expect(logger.lastCommand).toBe('\x1b[1A\x1b[33mfont in yellow,\x1b[0m\x1b[41mbackground in red,\x1b[0m');
-    });
-    
-    test('2 joint', () => {
-        logger
-            .color('yellow').log('font in yellow,').joint()
-            .bgColor('red').log('background in red,').joint()
-            .color('yellow').log('font in yellow');
-        
-        expect(logger.lastCommand).toBe('\x1b[1A\x1b[33mfont in yellow,\x1b[0m\x1b[41mbackground in red,\x1b[0m\x1b[33mfont in yellow\x1b[0m');
-    });
-})
-
-describe('append', () => {
-    test('1 append', () => {
-        logger.color('yellow').append('font in yellow,').bgColor('red').log('background in red');
-        
-        expect(logger.lastCommand).toBe('\x1b[33mfont in yellow,\x1b[41mbackground in red\x1b[0m');
-    })
-
-    test('2 append', () => {
-        logger.color('yellow').append('font in yellow,')
-            .bgColor('red').append('background in red,').reset()
-            .color('yellow').log('font in yellow');
-        
-        expect(logger.lastCommand).toBe('\x1b[33mfont in yellow,\x1b[41mbackground in red,\x1b[0m\x1b[33mfont in yellow\x1b[0m');
-    })
-})
-
-describe('fontColorLog', () => {
+describe('fontColorLog()', () => {
     test('Font in red.', () => {
         logger.fontColorLog('red', 'Font in red.');
         
@@ -174,7 +82,7 @@ describe('fontColorLog', () => {
     })
 })
 
-describe('bgColorLog', () => {
+describe('bgColorLog()', () => {
     test('Background in red.', () => {
         logger.bgColorLog('red', 'Background in red.');
         
@@ -255,7 +163,7 @@ describe('bgColorLog', () => {
     })
 })
 
-describe('colorLog', () => {
+describe('colorLog()', () => {
     test('Red font in black background.', () => {
         logger.colorLog({
             font: 'red',
@@ -309,68 +217,6 @@ describe('colorLog', () => {
         });
         
         expect(logger.lastCommand).toBe('\x1b[1m\x1b[4m\x1b[7m\x1b[9m\x1b[31m\x1b[42mRed font in green background, bold, underscore, reverse, strikethrough.\x1b[0m');
-    })
-})
-
-const getLevelLogTimestamp = (command) => {
-    const logFirstSpaceIndex = command.indexOf(' ');
-    const logDateStr = command.slice(0, logFirstSpaceIndex);
-    return (new Date(logDateStr)).getTime();
-}
-
-const getLevelLogMessage = (command) => {
-    const logFirstSpaceIndex = command.indexOf(' ');
-    const logMessage = command.slice(logFirstSpaceIndex + 1);
-    return logMessage;
-}
-
-describe('Level Log', () => {
-    test('This is debug mode', () => {
-        expect.assertions(2);
-
-        logger.debug('This is debug mode');
-
-        const logTimestamp = getLevelLogTimestamp(logger.lastCommand);
-        const logMessage = getLevelLogMessage(logger.lastCommand);
-
-        expect(Date.now() - logTimestamp).toBeLessThan(5 * 1000);
-        expect(logMessage).toBe('\x1b[46m\x1b[30m[DEBUG]\x1b[0m \x1b[36mThis is debug mode\x1b[0m');
-    })
-
-    test('This is error mode', () => {
-        expect.assertions(2);
-
-        logger.error('This is error mode');
-
-        const logTimestamp = getLevelLogTimestamp(logger.lastCommand);
-        const logMessage = getLevelLogMessage(logger.lastCommand);
-
-        expect(Date.now() - logTimestamp).toBeLessThan(5 * 1000);
-        expect(logMessage).toBe('\x1b[41m[ERROR]\x1b[0m \x1b[31mThis is error mode\x1b[0m');
-    })
-
-    test('This is info mode', () => {
-        expect.assertions(2);
-
-        logger.info('This is info mode');
-
-        const logTimestamp = getLevelLogTimestamp(logger.lastCommand);
-        const logMessage = getLevelLogMessage(logger.lastCommand);
-
-        expect(Date.now() - logTimestamp).toBeLessThan(5 * 1000);
-        expect(logMessage).toBe('\x1b[42m\x1b[30m[INFO]\x1b[0m \x1b[32mThis is info mode\x1b[0m');
-    })
-
-    test('This is warn mode', () => {
-        expect.assertions(2);
-
-        logger.warn('This is warn mode');
-
-        const logTimestamp = getLevelLogTimestamp(logger.lastCommand);
-        const logMessage = getLevelLogMessage(logger.lastCommand);
-
-        expect(Date.now() - logTimestamp).toBeLessThan(5 * 1000);
-        expect(logMessage).toBe('\x1b[43m\x1b[30m[WARN]\x1b[0m \x1b[33mThis is warn mode\x1b[0m');
     })
 })
 
