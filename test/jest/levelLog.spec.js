@@ -163,3 +163,29 @@ describe('set level', () => {
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('error', 'error show'));
     })
 })
+
+describe('level no color', () => {
+    test('set level no color', () => {
+        expect.assertions(9);
+
+        logger.setLevel("debug");
+        logger.setLevelNoColor();
+        expect(logger.noColor).toBe(true);
+
+        logger.error('error show');
+        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand)).toBe(' [ERROR]  error show');
+
+        logger.warn('warn show');
+        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand)).toBe(' [WARN]  warn show');
+
+        logger.info('info show');
+        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand)).toBe(' [INFO]  info show');
+
+        logger.debug('debug show');
+        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand)).toBe(' [DEBUG]  debug show');
+    })
+})
