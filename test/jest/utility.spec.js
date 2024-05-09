@@ -1,5 +1,7 @@
 const logger = require('../../index');
 
+logger._customizedConsole.error = () => {}
+
 describe('fontColorLog()', () => {
     test('Font in red.', () => {
         logger.fontColorLog('red', 'Font in red.');
@@ -221,8 +223,8 @@ describe('colorLog()', () => {
 })
 
 afterEach(() => {
-  // restore the spy created with spyOn
-  jest.restoreAllMocks();
+    // restore the spy created with spyOn
+    jest.restoreAllMocks();
 });
 
 describe('Wrong Usage', () => {

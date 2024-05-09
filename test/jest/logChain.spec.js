@@ -1,5 +1,7 @@
 const logger = require('../../index');
 
+logger._customizedConsole.error = () => {}
+
 describe('Common Log Chain', () => {
     test('blue and underscore.', () => {
         logger.color('blue').underscore().log('blue and underscore.');

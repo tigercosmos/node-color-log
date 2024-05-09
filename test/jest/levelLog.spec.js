@@ -5,6 +5,7 @@ const {
     createLevelLogMessage
 } = require('./utils/levelLogUtils');
 
+logger._customizedConsole.error = () => {}
 
 describe('Common Level Log', () => {
     test('This is debug mode', () => {

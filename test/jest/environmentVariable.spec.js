@@ -6,6 +6,8 @@ const {
     createLevelLogMessage
 } = require('./utils/levelLogUtils');
 
+logger._customizedConsole.error = () => {}
+
 describe('Environment Variable LOGGER', () => {
     test('LOGGER=info, debug and success level will not show', () => {
         logger.error('error show');
