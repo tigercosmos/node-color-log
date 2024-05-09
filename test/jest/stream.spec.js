@@ -30,7 +30,7 @@ describe('Write File', () => {
                 `${fixedDate.toISOString()} ${createLevelLogMessage('warn', 'hello world')}\n` +
                 `${fixedDate.toISOString()} ${createLevelLogMessage('error', 'hello world')}\n`;
             
-            expect(fileContent).toBe(expectedFileContent);
+            expect(fileContent, 'File content mismatch').toBe(expectedFileContent);
 
             fs.unlinkSync(FILE_NAME);
             logger.setDate(() => (new Date()).toISOString());

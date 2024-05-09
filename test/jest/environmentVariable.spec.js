@@ -16,7 +16,10 @@ describe('Environment Variable LOGGER', () => {
         logger.debug('debug will not show');
         logger.success('success will not show');
 
-        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
-        expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('info', 'info show'));
+        expect(
+            Date.now() - getLevelLogTimestamp(logger.lastCommand),
+            'Log time error exceeds 5 seconds'
+        ).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand), 'Message mismatch').toBe(createLevelLogMessage('info', 'info show'));
     })
 })
