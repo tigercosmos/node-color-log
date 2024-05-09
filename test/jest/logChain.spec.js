@@ -1,6 +1,6 @@
 const logger = require('../../index');
 
-describe('common log chain', () => {
+describe('Common Log Chain', () => {
     test('blue and underscore.', () => {
         logger.color('blue').underscore().log('blue and underscore.');
         
@@ -57,7 +57,7 @@ describe('common log chain', () => {
 });
 
 // deprecated joint
-describe('joint', () => {
+describe('Joint', () => {
     test('1 joint', () => {
         logger
             .color('yellow').log('font in yellow,')
@@ -76,7 +76,7 @@ describe('joint', () => {
     });
 })
 
-describe('append', () => {
+describe('Append', () => {
     test('1 append', () => {
         logger.color('yellow').append('font in yellow,').bgColor('red').log('background in red');
         

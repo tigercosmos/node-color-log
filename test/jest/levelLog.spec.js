@@ -42,7 +42,7 @@ const createLevelLogMessage = (level, message) => {
     }
 }
 
-describe('common level log', () => {
+describe('Common Level Log', () => {
     test('This is debug mode', () => {
         logger.debug('This is debug mode');
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
@@ -74,7 +74,7 @@ describe('common level log', () => {
     })
 })
 
-describe('set level', () => {
+describe('Set Level', () => {
     test('set level to debug', () => {
         logger.setLevel('debug');
         expect(logger.level).toBe('debug');
@@ -150,7 +150,7 @@ describe('set level', () => {
     })
 })
 
-describe('level no color', () => {
+describe('Level No Color', () => {
     test('set level no color', () => {
         logger.setLevelNoColor();
         expect(logger.noColor).toBe(true);
