@@ -195,3 +195,21 @@ describe('Special Object', () => {
             .toBe(createLevelLogMessage('info', `Should print "[object Object]" and not throw an error: ${object.toString()}`));
     })
 })
+
+describe('Named Level Log', () => {
+    test('create named log', () => {
+        const namedLogger = logger.createNamedLogger('myLog')
+
+        namedLogger.error('error show');
+        expect(Date.now() - getLevelLogTimestamp(namedLogger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(namedLogger.lastCommand)).toBe(`[myLog] ${createLevelLogMessage('error', 'error show')}`);
+
+        namedLogger.warn('warn show');
+        expect(Date.now() - getLevelLogTimestamp(namedLogger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(namedLogger.lastCommand)).toBe(`[myLog] ${createLevelLogMessage('warn', 'warn show')}`);
+
+        namedLogger.info('info show');
+        expect(Date.now() - getLevelLogTimestamp(namedLogger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(namedLogger.lastCommand)).toBe(`[myLog] ${createLevelLogMessage('info', 'info show')}`);
+    })
+})
