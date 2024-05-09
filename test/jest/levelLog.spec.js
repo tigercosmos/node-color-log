@@ -44,45 +44,31 @@ const createLevelLogMessage = (level, message) => {
 
 describe('common level log', () => {
     test('This is debug mode', () => {
-        expect.assertions(2);
-
         logger.debug('This is debug mode');
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('debug', 'This is debug mode'));
     })
 
     test('This is error mode', () => {
-        expect.assertions(2);
-
         logger.error('This is error mode');
-
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('error', 'This is error mode'));
     })
 
     test('This is info mode', () => {
-        expect.assertions(2);
-
         logger.info('This is info mode');
-
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('info', 'This is info mode'));
     })
 
     test('This is warn mode', () => {
-        expect.assertions(2);
-
         logger.warn('This is warn mode');
-
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('warn', 'This is warn mode'));
     })
 
     test('This is success mode', () => {
-        expect.assertions(2);
-
         logger.success('This is success mode');
-
         expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
         expect(getLevelLogMessage(logger.lastCommand)).toBe(createLevelLogMessage('success', 'This is success mode'));
     })
@@ -90,8 +76,6 @@ describe('common level log', () => {
 
 describe('set level', () => {
     test('set level to debug', () => {
-        expect.assertions(9);
-
         logger.setLevel('debug');
         expect(logger.level).toBe('debug');
 
@@ -115,8 +99,6 @@ describe('set level', () => {
     })
 
     test('set level to info', () => {
-        expect.assertions(7);
-
         logger.setLevel('info');
         expect(logger.level).toBe('info');
 
@@ -137,8 +119,6 @@ describe('set level', () => {
     })
 
     test('set level to warn', () => {
-        expect.assertions(5);
-
         logger.setLevel('warn');
         expect(logger.level).toBe('warn');
 
@@ -156,8 +136,6 @@ describe('set level', () => {
     })
 
     test('set level to error', () => {
-        expect.assertions(3);
-
         logger.setLevel('error');
         expect(logger.level).toBe('error');
 
@@ -174,8 +152,6 @@ describe('set level', () => {
 
 describe('level no color', () => {
     test('set level no color', () => {
-        expect.assertions(9);
-
         logger.setLevelNoColor();
         expect(logger.noColor).toBe(true);
 

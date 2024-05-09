@@ -227,7 +227,6 @@ afterEach(() => {
 
 describe('Wrong Usage', () => {
     test('Pass wrong font color string to fontColorLog()', () => {
-        expect.assertions(2);
         jest.spyOn(console, 'error');
 
         logger.fontColorLog('test', 'Should be no color.');
@@ -237,7 +236,6 @@ describe('Wrong Usage', () => {
     })
 
     test('Pass wrong background color string to bgColorLog()', () => {
-        expect.assertions(2);
         jest.spyOn(console, 'error');
 
         logger.bgColorLog('test', 'Should be no color.');
@@ -247,7 +245,6 @@ describe('Wrong Usage', () => {
     })
 
     test('Pass wrong font color string to colorLog()', () => {
-        expect.assertions(2);
         jest.spyOn(console, 'error');
 
         logger.colorLog({
@@ -260,7 +257,6 @@ describe('Wrong Usage', () => {
     })
 
     test('Pass wrong background color string to colorLog()', () => {
-        expect.assertions(2);
         jest.spyOn(console, 'error');
 
         logger.colorLog({
@@ -273,7 +269,6 @@ describe('Wrong Usage', () => {
     })
 
     test('Pass wrong font color string and background color string to colorLog()', () => {
-        expect.assertions(3);
         jest.spyOn(console, 'error');
 
         logger.colorLog({
@@ -287,7 +282,6 @@ describe('Wrong Usage', () => {
     })
 
     test('Pass wrong setting to fontColorLog()', () => {
-        expect.assertions(2);
         jest.spyOn(console, 'error');
 
         logger.fontColorLog('red', 'Wrong setting.', {
@@ -299,7 +293,6 @@ describe('Wrong Usage', () => {
     })
 
     test('Pass wrong setting to bgColorLog()', () => {
-        expect.assertions(2);
         jest.spyOn(console, 'error');
 
         logger.bgColorLog('red', 'Wrong setting.', {
@@ -311,7 +304,6 @@ describe('Wrong Usage', () => {
     })
 
     test('Pass wrong setting to bgColorLog()', () => {
-        expect.assertions(2);
         jest.spyOn(console, 'error');
 
         logger.bgColorLog('red', 'Wrong setting.', {
