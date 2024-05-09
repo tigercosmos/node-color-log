@@ -184,3 +184,14 @@ describe('Date Format', () => {
         logger.setDate(() => (new Date()).toISOString());
     })
 })
+
+describe('Special Object', () => {
+    test('Should print "[object Object]" and not throw an error:', () => {
+        const object = {}
+        object.x = object
+        logger.info('Should print "[object Object]" and not throw an error:', object);
+
+        expect(getLevelLogMessage(logger.lastCommand))
+            .toBe(createLevelLogMessage('info', `Should print "[object Object]" and not throw an error: ${object.toString()}`));
+    })
+})
