@@ -205,3 +205,18 @@ describe('Level Multiple Arguments', () => {
             .toBe(createLevelLogMessage('debug', `debug show ${JSON.stringify([1, 2, 3])}`));
     })
 })
+
+describe('Date Format', () => {
+    test('set date format', () => {
+        const fixedDate = new Date()
+        logger.setDate(() => fixedDate.toLocaleTimeString());
+        logger.info("This is an info message");
+
+        const logFirstSpaceIndex = logger.lastCommand.indexOf(' ');
+        const logDateStr = logger.lastCommand.slice(0, logFirstSpaceIndex);
+
+        expect(logDateStr).toBe(fixedDate.toLocaleTimeString());
+
+        logger.setDate(() => (new Date()).toISOString());
+    })
+})
