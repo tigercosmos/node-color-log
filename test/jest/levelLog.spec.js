@@ -174,3 +174,34 @@ describe('Level No Color', () => {
         logger.noColor = false
     })
 })
+
+describe('Level Multiple Arguments', () => {
+    test('error show', () => {
+        logger.error('error show', 'error show 2');
+        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand))
+            .toBe(createLevelLogMessage('error', `error show error show 2`));
+    })
+
+
+    test('warn show json', () => {
+        logger.warn('warn show', {a: 1, b: 2});
+        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand))
+            .toBe(createLevelLogMessage('warn', `warn show ${JSON.stringify({a: 1, b: 2})}`));
+    })
+
+    test('info show json', () => {
+        logger.info('info show', {a: [1, 2, 4]}, [4, 4, 4]);
+        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand))
+            .toBe(createLevelLogMessage('info', `info show ${JSON.stringify({a: [1, 2, 4]})} ${JSON.stringify([4, 4, 4])}`));
+    })
+
+    test('debug show json', () => {
+        logger.debug('debug show', [1, 2, 3]);
+        expect(Date.now() - getLevelLogTimestamp(logger.lastCommand)).toBeLessThan(5 * 1000);
+        expect(getLevelLogMessage(logger.lastCommand))
+            .toBe(createLevelLogMessage('debug', `debug show ${JSON.stringify([1, 2, 3])}`));
+    })
+})
