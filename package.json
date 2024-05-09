@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/tigercosmos/node-color-log",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "jest-expect-message": "^1.1.3"
   }
 }
