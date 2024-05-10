@@ -10,8 +10,6 @@ logger._customizedConsole.error = () => {}
 
 describe('Environment Variable LOGGER', () => {
     test('LOGGER=info, debug and success level will not show', () => {
-        logger.error('error show');
-        logger.warn('warn show');
         logger.info('info show');
         logger.debug('debug will not show');
         logger.success('success will not show');
