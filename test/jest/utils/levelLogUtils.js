@@ -1,15 +1,5 @@
 /**
  * @param {string} command 
- * @returns {number}
- */
-const getLevelLogTimestamp = (command) => {
-    const logFirstSpaceIndex = command.indexOf(' ');
-    const logDateStr = command.slice(0, logFirstSpaceIndex);
-    return (new Date(logDateStr)).getTime();
-}
-
-/**
- * @param {string} command 
  * @returns {string}
  */
 const getLevelLogMessage = (command) => {
