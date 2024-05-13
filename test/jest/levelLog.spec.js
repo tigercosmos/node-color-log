@@ -152,8 +152,8 @@ describe('Date Format', () => {
         const fixedDate = new Date()
         logger.setDate(() => fixedDate.toLocaleTimeString());
         logger.info("This is an info message");
-
-        const logFirstSpaceIndex = logger.lastCommand.indexOf(' ');
+        
+        const logFirstSpaceIndex = logger.lastCommand.indexOf(' ', 10); // xx:xx:xx AM/PM (....)
         const logDateStr = logger.lastCommand.slice(0, logFirstSpaceIndex);
 
         expect(logDateStr).toBe(fixedDate.toLocaleTimeString());

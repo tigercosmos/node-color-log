@@ -32,6 +32,5 @@ const createLevelLogMessage = (level, message) => {
 
 module.exports = {
     getLevelLogMessage,
-    getLevelLogTimestamp,
     createLevelLogMessage
 }
