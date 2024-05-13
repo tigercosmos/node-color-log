@@ -22,8 +22,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Install dependency
+      run: npm i
+
     - name: Run tests
-      run: npm test
+      run: npm run jest 
 
   test-macos:
     runs-on: macos-latest
@@ -41,8 +44,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Install dependency
+      run: npm i
+
     - name: Run tests
-      run: npm test
+      run: npm run jest 
 
   test-windows:
     runs-on: windows-latest
@@ -60,5 +66,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Install dependency
+      run: npm i
+
     - name: Run tests
-      run: npm test
+      run: npm run jest 
