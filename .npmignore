@@ -1,2 +1,5 @@
 assets
 .github
+test
+node_modules
+jest.config.js
