@@ -1,3 +1,6 @@
+12.0.1
+- added tests.
+
 12.0.0
 - default output to stderr. enhanced CI.
 
