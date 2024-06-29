@@ -6,9 +6,11 @@
 
 # Node Color Log
 
-The more powerful JavaScript logger for NodeJS and browsers.
+A lightweight and more JavaScript logger for NodeJS and browsers.
 
-`node-color-log` is a logger package for NodeJS and browsers. It provides more functions than the origin `console.log`. You can log text with colorful font and colorful background. Also, it has 4 levels log, including `debug`, `info`, `warn`and `error`. Give you much better experience while developing JavaScript projects.
+`node-color-log` is a logger package for NodeJS and browsers. It provides more functions than the origin `console.log`. You can log text with colorful fonts and colorful backgrounds. Also, it has 4 levels log, including `debug`, `info`, `warn` and `error`. Give you a much better experience while developing JavaScript projects.
+
+Winston and Pino are famous loggers for JaveScript, but they are too heavy and fancy. Sometimes we just want to have a simple logger, and don't want to spend time learning a fancy library. Then, `node-color-log` is your best choice.
 
 ## Demo
 
