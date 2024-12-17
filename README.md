@@ -10,7 +10,7 @@ A lightweight and more JavaScript logger for NodeJS and browsers.
 
 `node-color-log` is a logger package for NodeJS and browsers. It provides more functions than the origin `console.log`. You can log text with colorful fonts and colorful backgrounds. Also, it has 4 levels log, including `debug`, `info`, `warn` and `error`. Give you a much better experience while developing JavaScript projects.
 
-Winston and Pino are famous loggers for JaveScript, but they are too heavy and fancy. Sometimes we just want to have a simple logger, and don't want to spend time learning a fancy library. Then, `node-color-log` is your best choice.
+Winston and Pino are famous loggers for JavaScript, but they are too heavy and fancy. Sometimes we just want to have a simple logger, and don't want to spend time learning a fancy library. Then, `node-color-log` is your best choice.
 
 ## Demo
 
@@ -67,7 +67,7 @@ logger.log(message)
 logger.color('red').bgColor('blue')
       .bold().italic().dim().reverse().underscore().strikethrough()
       .log(message);
-// use `append`` to joint contents, and use `log` to print out at the end
+// use `append` to joint contents, and use `log` to print out at the end
 logger.color('red').bold().append('message_style_1')
       .bgColor('white').italic().append('message_style_2')
       .strikethrough().log('message_style_3');
@@ -85,7 +85,7 @@ logger.log(obj1, arr2, str3);
 
 You can redirect the logs to the stream.
 
-for example, you can write the log into the file:
+For example, you can write the log into the file:
 
 ```js
 fileStream = fs.createWriteStream('test.log'),
@@ -97,7 +97,7 @@ logger.error("hello", "world");
 fileStream.close()
 ```
 
-you can use `less -R test.log` to see the result.
+You can use `less -R test.log` to see the result.
 
 ### `fontColorLog()`, `bgColorLog()`, `colorLog()`
 
