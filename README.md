@@ -200,7 +200,7 @@ logger.setLevelNoColor();
 
 The default time format is `toISOString`, but you can change it by using `setDate(callback)`
 
-```
+```javascript
 logger.setDate(() => (new Date()).toLocaleTimeString())
 logger.info("This is an info message") // 5:17:59 pm [INFO] This is an info message
 ```
@@ -209,7 +209,7 @@ logger.info("This is an info message") // 5:17:59 pm [INFO] This is an info mess
 
 You can create a named logger by calling `createNamedLogger()`
 
-```
+```javascript
 logger1 = logger.createNamedLogger("Test 1");
 logger2 = logger.createNamedLogger("Test 2");
 logger1.info('something happened'); // 2022-08-20T04:56:17.834Z [Test 1] [INFO] something happened
