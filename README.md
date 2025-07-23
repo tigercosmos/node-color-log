@@ -111,7 +111,7 @@ logger.debug('This log should include file and line information.');
 
 logger.enableFileAndLine(true /* enable */, true /* short file name */);
 logger.debug('This log should include file and line information.');
-// 2025-07-23T18:43:27.200Z[index.js:157:33:157] [DEBUG] This log should include file and line information.
+// 2025-07-23T18:43:27.200Z[index.js:157] [DEBUG] This log should include file and line information.
 ```
 
 ### `fontColorLog()`, `bgColorLog()`, `colorLog()`

@@ -411,18 +411,19 @@ function getFileAndLine(isShortFile = false) {
     // Extract the file and line number
     const fileAndLine = line.substring(start + 1, end);
 
-    if (isShortFile) {
-        const fileName = fileAndLine.split('/').pop(); // Get the last part of the path
-        return `${fileName}:${fileAndLine.split(':')[1]}`; // Return file name and line number
-    }
-
     // Split by : to get the file path and line number
     const parts = fileAndLine.split(':');
     if (parts.length < 2) {
         return '';
     }
+
+    let fileName = parts[0];
+    if (isShortFile) {
+        fileName = fileAndLine.split('/').pop(); // Get the last part of the path
+        fileName = fileName.split(':')[0]; // Remove the line number part
+    }
     // Return the file path and line number
-    return `${parts[0]}:${parts[1]}`;
+    return `${fileName}:${parts[1]}`;
 }
 
 const logger = new Logger();

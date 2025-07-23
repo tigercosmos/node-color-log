@@ -1,5 +1,8 @@
+13.0.1
+- fixed a minor bug of `enableFileAndLine`
+
 13.0.0
-- add `enableFileAndLine`
+- added `enableFileAndLine`
 
 12.0.1
 - added tests.
