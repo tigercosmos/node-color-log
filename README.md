@@ -99,6 +99,21 @@ fileStream.close()
 
 You can use `less -R test.log` to see the result.
 
+### `enableFileAndLine()`
+
+Print the filename and line information in the logs. Note that this may increase a little performance overhead.
+
+```js
+logger.enableFileAndLine(true /* enable */);
+
+logger.debug('This log should include file and line information.');
+// 2025-07-23T18:43:27.199Z[/Users/tigercosmos/node-color-log/index.js:157] [DEBUG] This log should include file and line information.
+
+logger.enableFileAndLine(true /* enable */, true /* short file name */);
+logger.debug('This log should include file and line information.');
+// 2025-07-23T18:43:27.200Z[index.js:157:33:157] [DEBUG] This log should include file and line information.
+```
+
 ### `fontColorLog()`, `bgColorLog()`, `colorLog()`
 
 - `message` here must be a string.

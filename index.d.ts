@@ -32,6 +32,8 @@ declare class Logger {
 
     setLevelColor(): void;
 
+    enableFileAndLine(enable: boolean, isShortFile?: boolean): void;
+
     isLevelValid(level: types.LEVEL): boolean;
 
     isAllowedLevel(level: types.LEVEL): boolean;
@@ -47,27 +49,27 @@ declare class Logger {
     setDate(callback: Function): void;
 
     getDate(): string;
-    
+
     color(ticket: types.COLOR): Logger;
-    
+
     bgColor(ticket: types.COLOR): Logger;
-    
+
     bold(): Logger;
-    
+
     dim(): Logger;
-    
+
     underscore(): Logger;
-    
+
     strikethrough(): Logger;
-    
+
     reverse(): Logger;
-    
+
     italic(): Logger;
-    
+
     fontColorLog(ticket: types.COLOR, text: string, setting?: settingObject): void;
-    
+
     bgColorLog(ticket: types.COLOR, text: string, setting?: settingObject): void;
-    
+
     colorLog(ticketObj: ticketObject, text: string, setting?: settingObject): void;
 
     log(...args: any[]): Logger;

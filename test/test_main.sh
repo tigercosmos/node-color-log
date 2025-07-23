@@ -8,4 +8,6 @@ node test/test3.js
 
 LOGGER=info node test/test4.js
 
+node test/test5.js
+
 node test/test_stream.js

@@ -1,3 +1,6 @@
+13.0.0
+- add `enableFileAndLine`
+
 12.0.1
 - added tests.
 

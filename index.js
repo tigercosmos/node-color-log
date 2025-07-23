@@ -55,6 +55,11 @@ class Logger {
         this._getDate = () => (new Date()).toISOString();
 
         this._customizedConsole = console;
+
+        this._enableFileAndLine = {
+            enable: false,
+            isShortFile: false,
+        };
     }
 
     createNamedLogger(name) {
@@ -92,6 +97,15 @@ class Logger {
 
     isAllowedLevel(level) {
         return this.level ? LEVELS.indexOf(this.level) <= LEVELS.indexOf(level) : true
+    }
+
+    enableFileAndLine(enable, isShortFile = false) {
+        if (typeof enable === 'boolean') {
+            this._enableFileAndLine.enable = enable;
+            this._enableFileAndLine.isShortFile = isShortFile;
+        } else {
+            console.error("node-color-log warning: enableFileAndLine should be a boolean value.");
+        }
     }
 
     log(...args) {
@@ -134,11 +148,19 @@ class Logger {
     }
 
     getPrefix() {
+        let prefix = `${this._getDate()}`;
+
         if (this.name) {
-            return `${this._getDate()} [${this.name}]`;
-        } else {
-            return this._getDate();
+            prefix += ` [${this.name}]`;
         }
+        if (this._enableFileAndLine.enable) {
+            const fileAndLine = getFileAndLine(this._enableFileAndLine.isShortFile);
+            if (fileAndLine) {
+                prefix += `[${fileAndLine}]`;
+            }
+        }
+
+        return prefix;
     }
 
     color(ticket) {
@@ -374,6 +396,33 @@ class Logger {
         this.command += CONFIG.SYSTEM.reset;
         return this;
     }
+}
+
+function getFileAndLine(isShortFile = false) {
+    const e = new Error();
+    const line = e.stack.split('\n')[2]; // 3rd line: caller
+
+    // find ( and ) in the line from the end
+    let start = line.lastIndexOf('(');
+    let end = line.lastIndexOf(')');
+    if (start === -1 || end === -1 || start >= end) {
+        return '';
+    }
+    // Extract the file and line number
+    const fileAndLine = line.substring(start + 1, end);
+
+    if (isShortFile) {
+        const fileName = fileAndLine.split('/').pop(); // Get the last part of the path
+        return `${fileName}:${fileAndLine.split(':')[1]}`; // Return file name and line number
+    }
+
+    // Split by : to get the file path and line number
+    const parts = fileAndLine.split(':');
+    if (parts.length < 2) {
+        return '';
+    }
+    // Return the file path and line number
+    return `${parts[0]}:${parts[1]}`;
 }
 
 const logger = new Logger();
