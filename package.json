@@ -1,6 +1,6 @@
 {
   "name": "node-color-log",
-  "version": "13.0.2",
+  "version": "13.0.3",
   "description": "The more powerful JavaScript logger for NodeJS and browsers.",
   "main": "index.js",
   "scripts": {
