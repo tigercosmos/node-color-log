@@ -400,7 +400,19 @@ class Logger {
 
 function getFileAndLine(isShortFile = false) {
     const e = new Error();
-    const line = e.stack.split('\n')[2]; // 3rd line: caller
+
+    const lines = e.stack.split('\n')
+    let line = "";
+    for (let i = lines.length - 1; i >= 0; i--) {
+        const currentLine = lines[i];
+        if (currentLine.includes('Logger.') || currentLine.includes('node-color-log/index.js')) {
+            if (i + 1 >= lines.length) {
+                return '';
+            }
+            line = lines[i + 1].trim();
+            break
+        }
+    }
 
     // find ( and ) in the line from the end
     let start = line.lastIndexOf('(');

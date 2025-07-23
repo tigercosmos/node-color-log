@@ -4,13 +4,21 @@ logger.log('****************');
 logger.log('*** Test File and Line ***');
 logger.log('****************');
 
-logger.enableFileAndLine(true);
+function foo() {
+    bar();
+}
 
-logger.debug('This log should include file and line information.');
-logger.debug('Another log with file and line information.');
+function bar() {
+    logger.enableFileAndLine(true);
+
+    logger.debug('This log should include file and line information.');
+    logger.info('Another log with file and line information.');
 
 
-logger.enableFileAndLine(true, true);
+    logger.enableFileAndLine(true, true);
 
-logger.debug('This log should include file and line information.');
-logger.debug('Another log with file and line information.');
+    logger.debug('This log should include file and line information.');
+    logger.info('Another log with file and line information.');
+}
+
+foo();
