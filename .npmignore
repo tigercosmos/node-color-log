@@ -3,3 +3,6 @@ assets
 test
 node_modules
 jest.config.js
+*.test.log
+changelog.md
+.circleci
