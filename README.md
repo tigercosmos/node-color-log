@@ -3,6 +3,7 @@
 [![Test](https://github.com/tigercosmos/node-color-log/actions/workflows/test.yml/badge.svg)](https://github.com/tigercosmos/node-color-log/actions/workflows/test.yml)
 [![npm version](https://badge.fury.io/js/node-color-log.svg)](https://badge.fury.io/js/node-color-log)
 [![npm downloads](https://badgen.now.sh/npm/dm/node-color-log)](https://www.npmjs.com/package/node-color-log)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/tigercosmos/node-color-log)
 
 # Node Color Log
 
