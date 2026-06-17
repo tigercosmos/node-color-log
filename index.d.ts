@@ -19,7 +19,7 @@ type settingObject = {
 declare class Logger {
     command: string;
     lastCommand: string;
-    level: any;
+    level: types.LEVEL | undefined;
     noColor: boolean;
 
     setLevel(level: types.LEVEL): void;
@@ -46,9 +46,7 @@ declare class Logger {
 
     reset(): Logger;
 
-    setDate(callback: Function): void;
-
-    getDate(): string;
+    setDate(callback: () => string): void;
 
     color(ticket: types.COLOR): Logger;
 

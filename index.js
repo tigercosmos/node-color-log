@@ -70,17 +70,18 @@ class Logger {
         if (this.isLevelValid(level)) {
             this.level = level;
         } else {
-            throw "Level you are trying to set is invalid";
+            throw new Error("Level you are trying to set is invalid");
         }
 
     }
 
     setLogStream(newStream) {
-        if (newStream.writable) {
+        if (newStream && newStream.writable) {
             this._customizedConsole = new console.Console(newStream);
         } else {
-            throw "invalid writable stream object";
+            throw new Error("invalid writable stream object");
         }
+        return this;
     }
 
     setLevelNoColor() {
@@ -250,15 +251,19 @@ class Logger {
         if (setting) {
             command += this.checkSetting(setting);
         }
-        if (ticketObj.font in CONFIG.FONT) {
-            command += CONFIG.FONT[ticketObj.font];
-        } else {
-            console.error("node-color-log warning: Font color not found! Use the default.")
+        if (ticketObj.font !== undefined) {
+            if (ticketObj.font in CONFIG.FONT) {
+                command += CONFIG.FONT[ticketObj.font];
+            } else {
+                console.error("node-color-log warning: Font color not found! Use the default.")
+            }
         }
-        if (ticketObj.bg in CONFIG.BACKGROUND) {
-            command += CONFIG.BACKGROUND[ticketObj.bg]
-        } else {
-            console.error("node-color-log warning: Background color not found! Use the default.")
+        if (ticketObj.bg !== undefined) {
+            if (ticketObj.bg in CONFIG.BACKGROUND) {
+                command += CONFIG.BACKGROUND[ticketObj.bg]
+            } else {
+                console.error("node-color-log warning: Background color not found! Use the default.")
+            }
         }
 
         command += text;
@@ -398,6 +403,61 @@ class Logger {
     }
 }
 
+function parseStackFrame(line, isShortFile = false) {
+    if (typeof line !== 'string' || line.length === 0) {
+        return '';
+    }
+
+    // find ( and ) in the line from the end
+    let start = line.lastIndexOf('(');
+    let end = line.lastIndexOf(')');
+    let fileAndLine;
+    if (start !== -1 && end !== -1 && start < end) {
+        fileAndLine = line.substring(start + 1, end);
+    } else {
+        // V8 stack frames without parens (e.g., "    at /path/to/file.js:10:5")
+        const atPrefix = line.indexOf('at ');
+        fileAndLine = atPrefix !== -1 ? line.substring(atPrefix + 3).trim() : line.trim();
+    }
+
+    // Split from the right by `:` to safely handle Windows drive letters
+    // (e.g., "C:\foo\bar.js:10:5"). V8 frames usually look like
+    // "<file>:<line>:<column>", but sourcemap-aware tooling may emit
+    // "<file>:<line>" with no column, so accept either shape.
+    const lastColon = fileAndLine.lastIndexOf(':');
+    if (lastColon === -1) {
+        return '';
+    }
+    const secondLastColon = fileAndLine.lastIndexOf(':', lastColon - 1);
+
+    const isDigits = (s) => s.length > 0 && /^\d+$/.test(s);
+    const lastSeg = fileAndLine.substring(lastColon + 1);
+    const midSeg = secondLastColon === -1
+        ? ''
+        : fileAndLine.substring(secondLastColon + 1, lastColon);
+
+    let fileName;
+    let lineNumber;
+    if (secondLastColon !== -1 && isDigits(midSeg) && isDigits(lastSeg)) {
+        // file:line:col
+        fileName = fileAndLine.substring(0, secondLastColon);
+        lineNumber = midSeg;
+    } else if (isDigits(lastSeg)) {
+        // file:line (no column) — also handles Windows "C:\path\file.js:42"
+        // where the only "middle" colon belongs to the drive letter.
+        fileName = fileAndLine.substring(0, lastColon);
+        lineNumber = lastSeg;
+    } else {
+        return '';
+    }
+
+    if (isShortFile) {
+        const segments = fileName.split(/[\\/]/);
+        fileName = segments[segments.length - 1];
+    }
+    return `${fileName}:${lineNumber}`;
+}
+
 function getFileAndLine(isShortFile = false) {
     const e = new Error();
 
@@ -414,29 +474,10 @@ function getFileAndLine(isShortFile = false) {
         }
     }
 
-    // find ( and ) in the line from the end
-    let start = line.lastIndexOf('(');
-    let end = line.lastIndexOf(')');
-    if (start === -1 || end === -1 || start >= end) {
-        return '';
-    }
-    // Extract the file and line number
-    const fileAndLine = line.substring(start + 1, end);
-
-    // Split by : to get the file path and line number
-    const parts = fileAndLine.split(':');
-    if (parts.length < 2) {
-        return '';
-    }
-
-    let fileName = parts[0];
-    if (isShortFile) {
-        fileName = fileAndLine.split('/').pop(); // Get the last part of the path
-        fileName = fileName.split(':')[0]; // Remove the line number part
-    }
-    // Return the file path and line number
-    return `${fileName}:${parts[1]}`;
+    return parseStackFrame(line, isShortFile);
 }
 
 const logger = new Logger();
+// Internal helpers, exposed for testing only. Not part of the public API.
+logger._internal = { parseStackFrame };
 module.exports = logger;

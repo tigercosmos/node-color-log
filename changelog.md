@@ -1,3 +1,12 @@
+14.0.0
+- fixed `colorLog` printing spurious "color not found" warnings when only `font` or only `bg` is provided
+- fixed `enableFileAndLine` parsing on Windows paths (drive letters like `C:\...`)
+- replaced `throw "string"` with `throw new Error(...)` in `setLevel`/`setLogStream`
+- `setLogStream` now returns `this` (matches the type declaration)
+- corrected TypeScript declarations (removed nonexistent `getDate`, typed `level` and `setDate`)
+- added `types`, `files`, and `engines` fields to `package.json`
+- updated CI to `actions/checkout@v4`, `actions/setup-node@v4`, Node 20/22, and added `pull_request` trigger
+
 13.0.2
 - fixed a minor bug of `enableFileAndLine`
 
